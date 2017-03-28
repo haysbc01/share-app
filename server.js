@@ -7,39 +7,39 @@ var express     = require('express'),
     colors      = require('colors'),
     multiparty  = require('connect-multiparty'),
     fs          = require('fs'),
+    shareShit   = require('./controllers/share'),
+    cors        = require('cors'),
     PORT        = 4000,
     app         = express();
 
+mongoose.connect('mongodb://localhost/fileShare')
+
 app.use(
-  express.static('public')
-);
+  express.static('public'),
+  cors({
+    origin: 'http://10.125.129.213:8000', // ionic serve url
+    optionsSuccessStatus: 200,
+    credentials : true
+}))
 
 app.get('/', (req, res)=>{
   res.sendFile('index.html', {root : './public/html'});
 });
 
-app.post('/api/fileUpload', multiparty(),(req,res)=>{
-  // console.log(req.files.files)
-  req.files.files.forEach(function(file){
-    var name = `./public/img/Block-${Date.now()}-${file.name}`
-    // var fileObj ={
-    //   email:req.body.data.email,
-    //   downloadCode: req.body.data.downloadCode,
-    //   path: name
-    // }
-    // console.log(file)
+app.get('/api/files/:code', shareShit.get ,function(req,res){
+  res.send(`${req.params.code}`)
+})
+
+app.get('/download', (req,res)=>{
+  var file = fs.readFileSync(req.query.path)
+  // res.header('content-Type', 'octet-stream')
+  // res.contentType('application/pdf')
+  res.send(file)
+})
 
 
 
-    return fs.readFile(file.path, (err, data) =>{
-      // console.log('READ', data, name);
-      fs.writeFile(`${name}`, data, (err) =>{
-        console.log('WRITE', err, name)
-        // file.url = `${req.protocol}`
-      })
-      })
-    })
-  })
+  app.post('/api/files', multiparty(), shareShit.create)
 
 
 app.listen(PORT, ()=>{

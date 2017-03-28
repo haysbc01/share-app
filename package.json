@@ -12,6 +12,7 @@
     "body-parser": "^1.17.1",
     "colors": "^1.1.2",
     "connect-multiparty": "^2.0.0",
+    "cors": "^2.8.1",
     "express": "^4.15.2",
     "mongoose": "^4.9.2",
     "morgan": "^1.8.1",

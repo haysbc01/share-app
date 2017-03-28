@@ -1,3 +1,13 @@
 .right{
   float: right;
 }
+
+.drop-box{
+  width: 30vw;
+  height: 80px;
+  border: 1px solid red;
+}
+
+.red {
+  border-color: red;
+}

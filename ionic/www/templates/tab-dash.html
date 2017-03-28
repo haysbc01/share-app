@@ -1,0 +1,71 @@
+<ion-view view-title="Dashboard">
+  <ion-content class="padding">
+
+    <form>
+      <div class="form-group">
+        <button class="drop-box" ngf-drop multiple ng-model='share.newfiles'>Drag and Drop</button>
+        <br>
+        <br>
+        <button ngf-select multiple ng-model='share.newfiles'>Select Files</button>
+        <!-- <script>
+          // var uploadFiles = []
+          for (var i = 0; i<share.newfiles.length; i++){
+
+          }
+        </script> -->
+        <h5 ng-repeat='name in share.newfiles'>{{name.name}}</h5>
+      </div>
+
+
+     <div class="form-group">
+       <label for="Email">Email address</label>
+       <input type="" class="form-control" id="Email" placeholder="Email" ng-model='share.email'>
+     </div>
+
+     <div class="form-group">
+       <label for="downloadCode">Download Code</label>
+       <input type="" class="form-control" id="downloadCode" placeholder="Download Code" ng-model='share.downloadCode'>
+     </div>
+
+     <!-- <div class="form-group">
+       <label for="exampleInputPassword">Password (Optional)</label>
+       <input type="" class="form-control" id="exampleInputPassword" placeholder="Password" ng-model='share.password'>
+     </div> -->
+
+     <button type="submit" class="btn btn-default" ng-click='share.submit()'>Submit</button>
+    </form>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <form>
+      <div class="form-group">
+        <label for="fetchCode">Enter the Download Code</label>
+        <input type="" class='form-control' placeholder='Enter Download Code' ng-model='share.userCode'>
+
+      </div>
+      <button type="submit" class="btn btn-default" ng-click='share.download()'>Submit</button>
+
+    </form>
+
+    <h5>{{share.noDice}}</h5>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <div ng-repeat='file in share.dataFiles.files'>
+
+    <a href="/download?path={{file.path}}"><h5 >{{file.name}}</h5></a>
+    <!-- <img src="{{path}}" alt=""> -->
+    </div>
+    <!-- <img src="./public/img/Block-1490729577837-IMG_0027.JPG" alt="">
+    <img src="./img/Block-1490729577837-IMG_0027.JPG" alt=""> -->
+
+
+  </ion-content>
+</ion-view>

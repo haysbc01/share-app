@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app='share'>
+  <head>
+    <meta charset="utf-8">
+    <title>Share File</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.js" charset="utf-8"></script>
+
+    <script src="./js/module.js" charset="utf-8"></script>
+    <script src="./js/controller.js" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+  </head>
+  <body ng-controller='shareController as share'>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+
+        <div class="navbar-header right">
+          <h3 class="col-xs-4">Home</h3>
+          <h3 class="col-xs-4">How it Works</h3>
+          <h3 class="col-xs-4">Sign Up</h3>
+          <!-- <a class="navbar-brand" href="#"> -->
+            <!-- <img alt="Brand" src="..."> -->
+          <!-- </a> -->
+        </div>
+
+      </div>
+    </nav>
+
+    <h1 class="float-right">{{share.greeting}}</h1>
+    <h1>{{share.newfiles.name}}</h1>
+
+
+    <form>
+      <div class="form-group">
+        <button ngf-select multiple ng-model='share.newfiles'>Select Files</button>
+        <!-- <script>
+          // var uploadFiles = []
+          for (var i = 0; i<share.newfiles.length; i++){
+
+          }
+        </script> -->
+        <h5>{{share.newfiles[i].name}}</h5>
+        <h5 ng-repeat='name in share.newfiles'>{{name.name}}</h5>
+      </div>
+
+
+     <div class="form-group">
+       <label for="exampleInputEmail1">Email address</label>
+       <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" ng-model='share.email'>
+     </div>
+
+     <div class="form-group">
+       <label for="exampleInputCode">Download Code</label>
+       <input type="" class="form-control" id="exampleInputCode" placeholder="Download Code" ng-model='share.downloadCode'>
+     </div>
+
+     <!-- <div class="form-group">
+       <label for="exampleInputPassword">Password (Optional)</label>
+       <input type="" class="form-control" id="exampleInputPassword" placeholder="Password" ng-model='share.password'>
+     </div> -->
+
+     <button type="submit" class="btn btn-default" ng-click='share.submit()'>Submit</button>
+    </form>
+
+<!--
+<button ngt-select='uploadFiles($files)' multiple
+        accept='image/*'>Select Files</button> -->
+
+
+        <!-- <ul ng-repeat='f in files'>
+          <li>{{f.name}}</li>
+        </ul> -->
+
+
+  </body>
+</html>

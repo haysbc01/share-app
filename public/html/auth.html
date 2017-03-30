@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app='share'>
+  <head>
+    <meta charset="utf-8">
+    <title>Login / Sign Up</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.js" charset="utf-8"></script>
+
+    <script src="./js/module.js" charset="utf-8"></script>
+    <script src="./js/auth.controller.js" charset="utf-8"></script>
+    <script src="./js/factory.auth.js" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body ng-controller='authController as auth'>
+
+  <div class="container">
+    <div class="row">
+
+
+    <form class="col-xs-8">
+      <h1>Login</h1>
+      <div class="form-group">
+
+     <div class="form-group">
+       <label for="Email">Email address</label>
+       <input type="email" class="form-control" id="Email" placeholder="Email" ng-model='auth.email'>
+     </div>
+
+     <div class="form-group">
+       <label for="password">Password</label>
+       <input type='password' class="form-control" id="password" placeholder="Password" ng-model='auth.password'>
+     </div>
+
+     <button type="submit" class="btn btn-default" ng-click='auth.login()'>Submit</button>
+     <h3>{{auth.loginError}}</h3>
+     </div>
+    </form>
+
+    <form class="col-xs-8">
+      <h1>Register</h1>
+      <div class="form-group">
+
+     <div class="form-group">
+       <label for="Email">Email address</label>
+       <input ng-class='{red: auth.emailField === true}' type="email" class="form-control" id="Email" placeholder="Email" ng-model='auth.registerEmail'>
+     </div>
+
+     <div class="form-group">
+       <label for="password">Password</label>
+       <input ng-class='{red: auth.noPassMatch === true}' type='password' class="form-control" id="password" placeholder="Password" ng-model='auth.registerPassword'>
+     </div>
+
+     <div class="form-group">
+       <label for="password">Confirm Password</label>
+       <input ng-class='{red: auth.noPassMatch === true}' type='password' class="form-control" id="password" placeholder="Confirm Password" ng-model='auth.confirmPassword'>
+     </div>
+
+     <button type="submit" class="btn btn-default" ng-click='auth.register()'>Submit</button>
+     <h3>{{auth.tryAgain}}</h3>
+     </div>
+    </form>
+
+  </div>
+
+</div>
+
+  </body>
+</html>

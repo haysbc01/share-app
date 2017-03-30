@@ -3,11 +3,19 @@
 }
 
 .drop-box{
-  width: 30vw;
+  width: 100%;
   height: 80px;
   border: 1px solid red;
 }
 
 .red {
   border-color: red;
+}
+
+form {
+  border: 1px solid grey;
+  border-radius: 5px;
+  width: 40vw;
+  padding: 10px;
+  /*margin: 10px;*/
 }

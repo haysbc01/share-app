@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html ng-app='share'>
+  <head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.js" charset="utf-8"></script>
+
+    <script src="./js/module.js" charset="utf-8"></script>
+    <script src="./js/dash.controller.js" charset="utf-8"></script>
+    <script src="./js/factory.dash.js" charset="utf-8"></script>
+    <script src="./js/controller.js" charset="utf-8"></script>
+    <script src="./js/factory.share.js" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body >
+    <div ng-controller='dashController as dash'>
+
+
+      <a href="/logout"><h3>logout</h3></a>
+      <h1>{{dash.greeting}} {{dash.data.email}}</h1>
+    </div>
+
+    <div class="container" ng-controller='shareController as share'>
+      <div class="row">
+
+
+        <form class="col-xs-8" ngf-drop multiple ng-model='share.newfiles'>
+          <div class="form-group">
+            <!-- <button class="drop-box" ngf-drop multiple ng-model='share.newfiles'>Drag and Drop</button> -->
+            <h3>Drag and Drop anywhere</h3>
+            <!-- <h4>{{share.data}}</h4> -->
+            <h6>or</h6>
+
+            <button ngf-select multiple ng-model='share.newfiles'>Select Files</button>
+
+            <h5 ng-repeat='name in share.newfiles'>{{name.name}}</h5>
+          </div>
+
+
+         <div class="form-group">
+           <label for="Email">Email address</label>
+           <input type="email" class="form-control" id="Email" placeholder="Email" ng-model='share.email'>
+         </div>
+
+         <div class="form-group">
+           <label for="downloadCode">Download Code</label>
+           <input ng-class='{red: share.checkCode === true}' class="form-control" id="downloadCode" placeholder="Download Code" ng-model='share.downloadCode'>
+         </div>
+
+
+
+         <button type="submit" class="btn btn-default" ng-click='share.submit()'>Submit</button>
+        </form>
+
+
+        <form class="col-xs-4">
+          <div class="form-group">
+            <label for="fetchCode" >Enter a Download Code</label>
+            <input ng-class='{red: share.noCode === true}' class='form-control' placeholder='{{share.userCodePlaceHolder}}' ng-model='share.userCode'>
+
+          </div>
+          <button type="submit" class="btn btn-default" ng-click='share.download()'>Submit</button>
+          <br>
+          <h5>{{share.noDice}}</h5>
+          <div ng-repeat='file in share.dataFiles.files'>
+
+          <a href="/download?path={{file.path}}"><h5 >{{file.name}}</h5></a>
+          <!-- <img src="{{path}}" alt=""> -->
+          </div>
+          <!-- <img src="./public/img/Block-1490729577837-IMG_0027.JPG" alt="">
+          <img src="./img/Block-1490729577837-IMG_0027.JPG" alt=""> -->
+        </form>
+      </div>
+    </div>
+
+
+      <div ng-controller='dashController as dash'>
+        <ul ng-repeat='uploads in dash.files'>
+          <li>{{uploads.downloadCode}}</li>
+          <li ng-repeat='files in uploads.files'><a href="files.path">{{files.name}}</a></li>
+        </ul>
+      </div>
+
+
+  </body>
+</html>

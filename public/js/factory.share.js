@@ -3,26 +3,24 @@ angular.module('share')
 
 shareFactory.$inject = ['$http', 'Upload'];
 
-
 function shareFactory($http, Upload){
 
-  function checkCode(checkCode){
-    return $http({
-      method: 'GET',
-      url : '/api/files/'+checkCode
-    })
-  }
+function checkCode(checkCode){
+  return $http({
+    method: 'GET',
+    url : '/api/files/'+checkCode
+  })
+}
 
-  function createFile (files, data){
-    return Upload.upload({
-      // method: 'POST',
-      url: '/api/files',
-      data: {
-        files: files,
-        data: data
+function createFile (files, data){
+  return Upload.upload({
+    // method: 'POST',
+    url: '/api/files',
+    data: {
+      files: files,
+      data: data
     }
   })
-
 }
 
 function getDownload (downloadCode){

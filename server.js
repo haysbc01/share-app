@@ -1,45 +1,94 @@
 // require('colors')
-var express     = require('express'),
-    morgan      = require('morgan')('dev'),
-    mongoose    = require('mongoose'),
-    bodyParser  = require('body-parser'),
-    sockets     = require('socket.io'),
-    colors      = require('colors'),
-    multiparty  = require('connect-multiparty'),
-    fs          = require('fs'),
-    shareShit   = require('./controllers/share'),
-    cors        = require('cors'),
-    PORT        = 4000,
-    app         = express();
+var express         = require('express'),
+    morgan          = require('morgan')('dev'),
+    mongoose        = require('mongoose'),
+    bodyParser      = require('body-parser'),
+    sockets         = require('socket.io'),
+    colors          = require('colors'),
+    multiparty      = require('connect-multiparty'),
+    fs              = require('fs'),
+    shareShit       = require('./controllers/share'),
+    authShit        = require('./controllers/auth'),
+    dashShit        = require('./controllers/dash'),
+    cors            = require('cors'),
+    clientSessions  = require('client-sessions'),
+    PORT            = 4000,
+    app             = express();
 
 mongoose.connect('mongodb://localhost/fileShare')
 
+var sessionsMiddleware = clientSessions({
+  cookieName: 'auth-cookie',  // front-end cookie name
+      secret: 'BESTEVERSHAREAPP',        // the encryption password : keep this safe
+      requestKey: 'session',    // req.session,
+      duration: (86400 * 1000) * 7, // one week in milliseconds
+      cookie: {
+          ephemeral: false,     // when true, cookie expires when browser is closed
+          httpOnly: true,       // when true, the cookie is not accessible via front-end JavaScript
+          secure: false         // when true, cookie will only be read when sent over HTTPS
+      }
+})
+
+var checkIfLoggedIn = function (req, res, next) {
+    if (req.session.uid) {
+        console.info('User is logged in, proceeding to dashboard...'.green);
+        next();
+    } else {
+        console.warn('User is not logged in!'.yellow)
+        res.redirect('/auth');
+    }
+  }
+
 app.use(
   express.static('public'),
+  (sessionsMiddleware),
+  bodyParser.json(),
   cors({
     origin: 'http://10.125.129.213:8000', // ionic serve url
     optionsSuccessStatus: 200,
     credentials : true
-}))
+}));
 
 app.get('/', (req, res)=>{
   res.sendFile('index.html', {root : './public/html'});
 });
 
-app.get('/api/files/:code', shareShit.get ,function(req,res){
-  res.send(`${req.params.code}`)
+app.get('/auth', (req, res)=>{
+  res.sendFile('auth.html', {root : './public/html'})
+});
+
+app.get('/dashboard',checkIfLoggedIn, (req,res)=>{
+  res.sendFile('dashboard.html', {root : './public/html'})
+  // res.send('go home')
 })
+
+app.get('/api/files/:code', shareShit.get ,(req,res)=>{
+  res.send(`${req.params.code}`)
+});
 
 app.get('/download', (req,res)=>{
   var file = fs.readFileSync(req.query.path)
   // res.header('content-Type', 'octet-stream')
   // res.contentType('application/pdf')
   res.send(file)
+});
+
+app.get('/api/uploads/:data', dashShit.get, (req,res)=>{
+  res.send(req.params.data)
 })
 
+app.get('/logout', (req,res)=>{
+  req.session.reset();
+  res.redirect('/');
+});
 
+app.get('/me', authShit.me);
 
-  app.post('/api/files', multiparty(), shareShit.create)
+app.post('/register', authShit.registerUser);
+
+app.post('/login', authShit.loginUser);
+
+app.post('/api/files', multiparty(), shareShit.create);
 
 
 app.listen(PORT, ()=>{

@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.1",
+    "client-sessions": "^0.7.0",
     "colors": "^1.1.2",
     "connect-multiparty": "^2.0.0",
     "cors": "^2.8.1",

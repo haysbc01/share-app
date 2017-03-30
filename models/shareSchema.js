@@ -6,6 +6,7 @@ var shareSchema = mongoose.Schema({
   path : Array,
   downloadCode : String,
   editCode : String,
+  createdBy: String,
   createdAt : {type : Number, default : () => Date.now()},
   deleteDate: Number
 });

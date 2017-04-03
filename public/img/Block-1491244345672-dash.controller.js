@@ -5,9 +5,7 @@ dashCtrl.$inject = ['$http', 'dashFactory'];
 
 function dashCtrl ($http, dashFactory){
   var dash = this;
-  dash.greeting = 'Hello again';
-  dash.limit = 5;
-  dash.boxLimit = 3;
+  dash.greeting = 'Hello again'
 
   dash.load = function(){
     dashFactory
@@ -59,10 +57,6 @@ function dashCtrl ($http, dashFactory){
     dashFactory
       .addFiles(block,files)
       .then(dash.load)
-  }
-
-  dash.moreFiles = function(){
-    dash.limit += 5
   }
 
 

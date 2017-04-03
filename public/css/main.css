@@ -27,7 +27,7 @@ form {
 
 .userCodes {
   border: 1px solid grey;
-  padding: 3%;
+  padding: 1% 2%;
   margin: 1%;
   border-radius: 5px;
   width: 30%;
@@ -137,10 +137,16 @@ form {
   background-color: white;
   color: red;
   font-size: 2vw;
+  position: absolute;
+  left: 23vw;
 }
 
 .editImg{
   width: 2vw;
+  top: 1vh;
+  left: 1vw;
+  position: relative;
+  transform: translate(-50%,-20%);
 }
 
 .left-angle{
@@ -151,25 +157,30 @@ form {
        -moz-transform: skew(-20deg);
          -o-transform: skew(-20deg);
     background: black;
-    position:absolute;
+    /*border-right: 2px solid grey*/
 }
 .left-angle > h1{
   position: absolute;
-  left: 50%;
+  left: 33vw;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%,-85%);
+  font-size: 4vw;
 }
 
 .right-angle{
   position: absolute;
-  width: 62vw;
+  width: 100vw;
   height: 10vh;
-  left: 38vw;
   background-color: grey;
 }
 .right-angle > h1{
   position: absolute;
-  left: 50%;
+  right: 0vw;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%,-85%);
+  font-size: 4vw;
+}
+
+.blockTitle{
+  border-bottom: 1px solid black;
 }

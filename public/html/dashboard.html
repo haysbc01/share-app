@@ -27,24 +27,26 @@
         </div>
       </div>
     </nav>
-    <div ng-class="{'background': upload || download}">
 
-    <div class="right-angle" ng-click='download =! download' ng-hide='upload || download'><h1>Upload Files</h1></div>
-    <div class="left-angle" ng-click='upload =! upload' ng-hide='upload || download'><h1>Download Files</h1></div>
+    <div class="right-angle" ng-click='download =! download' ng-hide='share.upload || download'><h1>Download Files</h1></div>
+    <div class="left-angle" ng-click='share.upload =! share.upload' ng-hide='share.upload || download'><h1>Upload Files</h1></div>
+
+    <!-- <div ng-class="{'background': share.upload || share.download}"> -->
 
 
-    <div ng-controller='dashController as dash'>
+    <div ng-controller='dashController as dash' g-hide='share.upload || download'>
 
 
       <a href="/logout"><h3>logout</h3></a>
       <h1>{{dash.greeting}} {{dash.data.email}}</h1>
     </div>
 
-    <!-- <div class="container" ng-controller='shareController as share'>
-      <div class="row"> -->
+    <div class="container" ng-controller='shareController as share'>
+      <div class="row">
 
-      <form class="newModal" ngf-drop multiple ng-model='share.newfiles' ng-show='upload'>
-        <h1 ng-click='upload =! upload'>X</h1>
+
+      <form class="newModal" ngf-drop multiple ng-model='share.newfiles' ng-show='share.upload'>
+        <h1 ng-click='share.upload =! share.upload'>X</h1>
         <div class="form-group">
           <!-- <button class="drop-box" ngf-drop multiple ng-model='share.newfiles'>Drag and Drop</button> -->
           <h3>Drag and Drop anywhere</h3>
@@ -97,23 +99,25 @@
       </form>
 
 
-      <!-- </div> -->
-    <!-- </div> -->
+      </div>
+    </div>
 
-<div ng-hide='download'>
+<div ng-hide='share.upload || download'>
 
 
 
       <div ng-controller='dashController as dash'>
         <div class="containner">
           <div class="row">
-            <div class="col-xs-3 userCodes" ng-repeat='uploads in dash.files | limitTo: dash.boxLimit'>
+            <div class="col-sm-3 userCodes" ng-repeat='uploads in dash.files | limitTo: dash.boxLimit'>
+
               <button class='delete' ng-click='dash.deleteBlock(uploads._id,uploads.files)' alt='Delete this Block'>X</button>
               <button class='add' ngf-select='dash.addToBlock(uploads._id,dash.newfiles)' multiple ng-model='dash.newfiles'>+</button>
+              <div class="blockTitle">
 
-              <h2>Download Code: {{uploads.downloadCode}}</h2>
-              <h2>Date Created: {{uploads.createdAt | date}}</h2>
-
+                <h2>Download Code: {{uploads.downloadCode}}</h2>
+                <h4>Date Created: {{uploads.createdAt | date}}</h4>
+              </div>
               <div class="uploadedFiles" ng-repeat='files in uploads.files | limitTo: dash.limit'>
               <div class="uploads">
                 <a href="/download?path={{files.path}}" download='{{files.name}}'><h6 ng-hide='name'><img class='icon' ng-src="{{files.fileTypePath}}" alt=""> {{files.name | limitTo:30}}</h6></a>

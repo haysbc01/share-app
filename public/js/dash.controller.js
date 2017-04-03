@@ -11,7 +11,6 @@ function dashCtrl ($http, dashFactory){
     dashFactory
       .getMe()
       .then(function(responseData){
-        console.log(responseData)
         dash.data = responseData.data
         dash.loadUploads(dash.data._id)
       })
@@ -24,6 +23,47 @@ function dashCtrl ($http, dashFactory){
         dash.files = responseData.data;
       })
   }
+
+
+  dash.edit = function(id){
+    dashFactory
+      .getEdits(id)
+      .then(function(responseData){
+        dash.editFiles = responseData.data;
+        dash.load()
+        // dash.editModal = true;
+      })
+  }
+
+  dash.delete = function(id, data){
+    dashFactory
+      .deleteFile(id, data)
+      .then(dash.load)
+  }
+
+  dash.deleteBlock = function(id, files){
+    dashFactory
+      .deleteBlock(id,files)
+      .then(dash.load)
+  }
+
+  dash.editName = function(id,files,name){
+    dashFactory
+      .editName(id,files,name)
+      .then(dash.load)
+  }
+
+  dash.addToBlock = function(block,files){
+    console.log(files)
+    dashFactory
+      .addFiles(block,files)
+      .then(dash.load)
+  }
+
+
+
+
+
   dash.load()
 }
 

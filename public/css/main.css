@@ -19,3 +19,32 @@ form {
   padding: 10px;
   /*margin: 10px;*/
 }
+
+.icon {
+  width: 20px;
+  display: inline-block;
+}
+
+.userCodes {
+  border: 1px solid grey;
+  padding: 3%;
+  margin: 1%;
+  border-radius: 5px;
+  width: 30%
+}
+
+.add{
+  position: absolute;
+  top: 1vh;
+  left: 1vw;
+}
+
+.delete{
+  position: absolute;
+  top: 1vh;
+  left: 25vw;
+}
+
+.uploadedFiles{
+  /*display: inline-block;*/
+}

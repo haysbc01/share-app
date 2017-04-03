@@ -5,11 +5,26 @@ shareCtrl.$inject = ['Upload', 'shareFactory', 'dashFactory'];
 
 function shareCtrl(Upload, shareFactory, dashFactory){
   var share = this;
-  share.data = ''
+  share.data = '';
   share.checkCode = false;
-  share.userCodePlaceHolder = 'Enter a Download Code'
+  share.userCodePlaceHolder = 'Enter a Download Code';
+  share.size = 0;
+  share.big = false;
+  share.email ='';
 
   share.submit = function (){
+    var array = share.newfiles.map(function(file){return file.size})
+    var size = 0;
+    for (var i = 0; i<array.length;i++){
+    size += array[i]
+    }
+    if (size > share.size){
+      console.log('Thats too much')
+      share.big = true
+
+    } else{
+      console.log('that works')
+    }
     shareFactory
       .checkCode(share.downloadCode)
       .then(function(responseData){
@@ -32,16 +47,14 @@ function shareCtrl(Upload, shareFactory, dashFactory){
   });
 };
   share.submitP2 = function(shareWho){
-    console.log('share.who', shareWho)
     shareFactory
-
       .createFile(share.newfiles,{
         email:share.email,
         downloadCode:share.downloadCode,
         createdBy:shareWho
       })
-      .then(function(fromServer){
-        console.log(fromServer);
+      .then(function(responseData){
+        dashFactory.getMe()
       })
       share.newfiles = '';
       share.email = '';
@@ -51,7 +64,6 @@ function shareCtrl(Upload, shareFactory, dashFactory){
 
 
   share.download = function(){
-    console.log(share.userCode)
 
     shareFactory
       .getDownload(share.userCode)
@@ -73,4 +85,20 @@ function shareCtrl(Upload, shareFactory, dashFactory){
       })
       share.userCode = ''
   }
+
+  share.load = function(){
+    dashFactory
+      .getMe()
+      .then(function(responseData){
+        share.data = responseData.data
+
+        if(share.data){
+          share.size = 524288000;
+          share.email = share.data.email;
+        } else {
+          share.size = 104857600;
+        }
+      })
+  }
+  share.load()
 };

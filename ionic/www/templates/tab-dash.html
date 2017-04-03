@@ -1,71 +1,74 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-
-    <form>
-      <div class="form-group">
-        <button class="drop-box" ngf-drop multiple ng-model='share.newfiles'>Drag and Drop</button>
-        <br>
-        <br>
-        <button ngf-select multiple ng-model='share.newfiles'>Select Files</button>
-        <!-- <script>
-          // var uploadFiles = []
-          for (var i = 0; i<share.newfiles.length; i++){
-
-          }
-        </script> -->
-        <h5 ng-repeat='name in share.newfiles'>{{name.name}}</h5>
-      </div>
+    <div>
 
 
-     <div class="form-group">
-       <label for="Email">Email address</label>
-       <input type="" class="form-control" id="Email" placeholder="Email" ng-model='share.email'>
-     </div>
-
-     <div class="form-group">
-       <label for="downloadCode">Download Code</label>
-       <input type="" class="form-control" id="downloadCode" placeholder="Download Code" ng-model='share.downloadCode'>
-     </div>
-
-     <!-- <div class="form-group">
-       <label for="exampleInputPassword">Password (Optional)</label>
-       <input type="" class="form-control" id="exampleInputPassword" placeholder="Password" ng-model='share.password'>
-     </div> -->
-
-     <button type="submit" class="btn btn-default" ng-click='share.submit()'>Submit</button>
-    </form>
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <form>
-      <div class="form-group">
-        <label for="fetchCode">Enter the Download Code</label>
-        <input type="" class='form-control' placeholder='Enter Download Code' ng-model='share.userCode'>
-
-      </div>
-      <button type="submit" class="btn btn-default" ng-click='share.download()'>Submit</button>
-
-    </form>
-
-    <h5>{{share.noDice}}</h5>
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <div ng-repeat='file in share.dataFiles.files'>
-
-    <a href="/download?path={{file.path}}"><h5 >{{file.name}}</h5></a>
-    <!-- <img src="{{path}}" alt=""> -->
+      <a href="/logout"><h3>logout</h3></a>
+      <h1>{{dash.greeting}} {{dash.data.email}}</h1>
     </div>
-    <!-- <img src="./public/img/Block-1490729577837-IMG_0027.JPG" alt="">
-    <img src="./img/Block-1490729577837-IMG_0027.JPG" alt=""> -->
+
+    <div class="container" ng-controller='shareController as share'>
+      <div class="row">
 
 
+        <form class="col-xs-8" ngf-drop multiple ng-model='share.newfiles'>
+          <div class="form-group">
+            <!-- <button class="drop-box" ngf-drop multiple ng-model='share.newfiles'>Drag and Drop</button> -->
+            <h3>Drag and Drop anywhere</h3>
+            <!-- <h4>{{share.data}}</h4> -->
+            <h6>or</h6>
+
+            <button ngf-select multiple ng-model='share.newfiles'>Select Files</button>
+
+            <h5 ng-repeat='name in share.newfiles'>{{name.name}}</h5>
+          </div>
+
+
+         <div class="form-group">
+           <label for="Email">Email address</label>
+           <input type="email" class="form-control" id="Email" placeholder="Email" ng-model='share.email'>
+         </div>
+
+         <div class="form-group">
+           <label for="downloadCode">Download Code</label>
+           <input ng-class='{red: share.checkCode === true}' class="form-control" id="downloadCode" placeholder="Download Code" ng-model='share.downloadCode'>
+         </div>
+
+
+
+         <button type="submit" class="btn btn-default" ng-click='share.submit()'>Submit</button>
+        </form>
+
+
+        <form class="col-xs-4">
+          <div class="form-group">
+            <label for="fetchCode" >Enter a Download Code</label>
+            <input ng-class='{red: share.noCode === true}' class='form-control' placeholder='{{share.userCodePlaceHolder}}' ng-model='share.userCode'>
+
+          </div>
+          <button type="submit" class="btn btn-default" ng-click='share.download()'>Submit</button>
+          <br>
+          <h5>{{share.noDice}}</h5>
+          <div ng-repeat='file in share.dataFiles.files'>
+
+          <h5 ><a href="/download?path={{file.path}}">{{file.name}}</a></h5>
+          <!-- <img src="{{path}}" alt=""> -->
+          </div>
+          <!-- <img src="./public/img/Block-1490729577837-IMG_0027.JPG" alt="">
+          <img src="./img/Block-1490729577837-IMG_0027.JPG" alt=""> -->
+        </form>
+      </div>
+    </div>
+
+
+      <div>
+        <ul ng-repeat='uploads in dash.files'>
+          <li>Download Code: {{uploads.downloadCode}} Date Created: {{uploads.createdAt}}</li>
+          <li ng-repeat='files in uploads.files'><a href="/download?path={{files.path}}">{{files.name}}</a></li>
+          <!-- <div ng-repeat='files in uploads.files'> -->
+            <!-- <a href="/download?path={{files.path}}"><li>{{files.name}}-{{files.name}}</li></a> -->
+          </div>
+        </ul>
+      </div>
   </ion-content>
 </ion-view>

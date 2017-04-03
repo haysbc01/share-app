@@ -1,0 +1,54 @@
+<ion-view view-title="Login">
+  <ion-content>
+    <div class="container">
+    <div class="row">
+
+
+    <form class="col-xs-8">
+      <h1>Login</h1>
+      <div class="form-group">
+
+     <div class="form-group">
+       <label for="Email">Email address</label>
+       <input type="email" class="form-control" id="Email" placeholder="Email" ng-model='auth.email'>
+     </div>
+
+     <div class="form-group">
+       <label for="password">Password</label>
+       <input type='password' class="form-control" id="password" placeholder="Password" ng-model='auth.password'>
+     </div>
+
+     <button type="submit" class="btn btn-default" ng-click='auth.login()'>Submit</button>
+     <h3>{{auth.loginError}}</h3>
+     </div>
+    </form>
+
+    <form class="col-xs-8">
+      <h1>Register</h1>
+      <div class="form-group">
+
+     <div class="form-group">
+       <label for="Email">Email address</label>
+       <input ng-class='{red: auth.emailField === true}' type="email" class="form-control" id="Email" placeholder="Email" ng-model='auth.registerEmail'>
+     </div>
+
+     <div class="form-group">
+       <label for="password">Password</label>
+       <input ng-class='{red: auth.noPassMatch === true}' type='password' class="form-control" id="password" placeholder="Password" ng-model='auth.registerPassword'>
+     </div>
+
+     <div class="form-group">
+       <label for="password">Confirm Password</label>
+       <input ng-class='{red: auth.noPassMatch === true}' type='password' class="form-control" id="password" placeholder="Confirm Password" ng-model='auth.confirmPassword'>
+     </div>
+
+     <button type="submit" class="btn btn-default" ng-click='auth.register()'>Submit</button>
+     <h3>{{auth.tryAgain}}</h3>
+     </div>
+    </form>
+
+  </div>
+
+</div>
+  </ion-content>
+</ion-view>

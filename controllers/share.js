@@ -2,20 +2,24 @@ var Share = require('../models/shareSchema.js'),
     fs    = require('fs');
 
 module.exports = {
-  create : (req, res) =>{
-    console.log('POST - api/files - create'.blue, req.files);
+  create : (req, res, next) =>{
+    // console.log('POST - api/files - create'.blue, req.files);
 
     var fileObjs = [];
     for(var key in req.files.files){
       var file = req.files.files[key];
-      var path = `./public/img/Block-${Date.now()}-${file.name}`
-      console.log('======================')
-      console.log(file)
+      // var fileName = file.name;
+      var path = `./public/img/Block-${Date.now()}-${file.name}`;
+      // console.log(file);
+      var fileType = file.name.slice((file.name.lastIndexOf('.'))+1,file.name.length);
+      var fileTypePath = `./docIMG/${fileType}.png`
       var data = fs.readFileSync(file.path)
-      fs.writeFileSync(`${path}`, data)
+      fs.writeFileSync(`${path}`, data);
 
       fileObjs.push({
         name : file.name,
+        fileType : fileType,
+        fileTypePath : fileTypePath,
         path : path,
 
         // thumb :,
@@ -42,19 +46,18 @@ module.exports = {
     //   });
     req.body.data.createdAt = Date.now(),
     // req.body.data.editCode = Math.floor(Math.random()*1000000);
-    // req.body.data.createdBy = 
+    // req.body.data.createdBy =
     req.body.data.files = fileObjs;
 
     (new Share(req.body.data)).save((err,doc)=>{
       if(err){
         return res.send(err);
       }res.send(doc);
+      // next();
     })
   },
 
   get : (req,res) =>{
-    console.log('GET - api/files - get'.blue, req.body);
-
       Share.findOne({downloadCode: req.params.code}, function(err,foundFile){
         if(err){
           console.log(err);
@@ -62,7 +65,6 @@ module.exports = {
           res.send(foundFile)
         }
       })
-    console.log(req.body)
   },
 
   check : (req,res) =>{
@@ -73,6 +75,5 @@ module.exports = {
         res.send(foundFile)
       }
     })
-    console.log(req.body)
   }
 }

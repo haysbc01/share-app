@@ -10,6 +10,7 @@ var express         = require('express'),
     shareShit       = require('./controllers/share'),
     authShit        = require('./controllers/auth'),
     dashShit        = require('./controllers/dash'),
+    emailShit       = require('./controllers/email'),
     cors            = require('cors'),
     clientSessions  = require('client-sessions'),
     PORT            = 4000,
@@ -44,7 +45,7 @@ app.use(
   (sessionsMiddleware),
   bodyParser.json(),
   cors({
-    origin: 'http://10.125.129.213:8000', // ionic serve url
+    origin: 'http://10.25.15.25:8100', // ionic serve url
     optionsSuccessStatus: 200,
     credentials : true
 }));
@@ -60,10 +61,14 @@ app.get('/auth', (req, res)=>{
 app.get('/dashboard',checkIfLoggedIn, (req,res)=>{
   res.sendFile('dashboard.html', {root : './public/html'})
   // res.send('go home')
-})
+});
 
 app.get('/api/files/:code', shareShit.get ,(req,res)=>{
   res.send(`${req.params.code}`)
+});
+
+app.get('/api/edits/:id', dashShit.getEdits, (req,res)=>{
+  res.send(`${req.params.id}`)
 });
 
 app.get('/download', (req,res)=>{
@@ -83,12 +88,14 @@ app.get('/logout', (req,res)=>{
 });
 
 app.get('/me', authShit.me);
-
 app.post('/register', authShit.registerUser);
-
 app.post('/login', authShit.loginUser);
+app.post('/api/files', multiparty(), shareShit.create, emailShit.email);
+app.post('/api/delete/:id', dashShit.deleteFiles);
+app.post('/api/deleteBlock/:id', dashShit.deleteBlock);
+app.put('/api/editName/:id', dashShit.edit);
+app.post('/api/addFiles/:id', multiparty(), dashShit.add);
 
-app.post('/api/files', multiparty(), shareShit.create);
 
 
 app.listen(PORT, ()=>{

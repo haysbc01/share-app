@@ -3,5 +3,9 @@
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.3.3"
+  },
+  "dependencies": {
+    "ng-file-upload": "^12.2.13",
+    "bootstrap": "v4.0.0-alpha.6"
   }
 }

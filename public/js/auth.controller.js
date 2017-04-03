@@ -7,6 +7,7 @@ function authCtrl ($http, authFactory){
   var auth = this;
 
   auth.match = false;
+  auth.tryAgain = '';
 
   auth.register = function(){
     if(auth.registerPassword != auth.confirmPassword){

@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngFileUpload'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -43,19 +43,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   .state('tab.dash', {
     url: '/dash',
     views: {
-      'tab-dash': {
+      'tab-dash' : {
         templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+        controller: 'dashController',
+        controllerAs: 'dash'
       }
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.login', {
+      url: '/login',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-login': {
+          templateUrl: 'templates/tab-login.html',
+          controller: 'authController',
+          controllerAs: 'auth'
         }
       }
     })

@@ -99,8 +99,11 @@ form {
 }*/
 
 
-
-/*.left-angle{
+.angles {
+  overflow:hidden;
+  height:10vh;
+}
+.left-angle{
   position: absolute;
   width: 50vw;
   height: 10vh;
@@ -125,7 +128,7 @@ form {
   left: 10%;
   top: 10%;
   font-size: 250%;
-}*/
+}
 
 .blockTitle{
   border-bottom: 1px solid black;

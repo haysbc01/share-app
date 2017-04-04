@@ -84,6 +84,7 @@
   }
 
   .left-angle{
+    position: relative;
     width: 60vw;
     height: 10vh;
     margin: 0 0 0 -135px;
@@ -95,23 +96,26 @@
   }
   .left-angle > h1{
     position: absolute;
-    left: 33vw;
-    top: 50%;
-    transform: translate(-50%,-85%);
+    left: 25vw;
+    top: ;
+    /*transform: translate(-50%,-85%);*/
     font-size: 4vw;
+    transform: skewX(20deg);
   }
 
   .right-angle{
     position: absolute;
     width: 100vw;
     height: 10vh;
+    left:0vw;
     background-color: grey;
   }
   .right-angle > h1{
     position: absolute;
-    right: 0vw;
-    top: 50%;
-    transform: translate(-50%,-85%);
+    right: ;
+    left: 64vw;
+    /*top: 50%;*/
+    /*transform: translate(-50%,-85%);*/
     font-size: 4vw;
   }
 

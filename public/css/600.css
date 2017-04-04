@@ -1,0 +1,118 @@
+@media screen and (min-width: 600px) {
+
+  .right-select{
+    position: absolute;
+    width: 100vw;
+    height: 70vh;
+    background-color: grey;
+    /*transform: rotate(0deg) scale(1) skew(-30deg) translate(0px);*/
+  }
+
+  .right-select > h1{
+    position: absolute;
+    left: 75%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+  .left-select > h1{
+    position: absolute;
+    left: 45%;
+    top: 47%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: skew(20deg)
+  }
+
+  .left-select {
+    width: 70vw;
+    height: 70vh;
+    margin: 0 0 0 -20vw;
+    -webkit-transform: skew(-20deg);
+       -moz-transform: skew(-20deg);
+         -o-transform: skew(-20deg);
+    background: black;
+    position:absolute;
+  }
+  .userCodes {
+    border: 1px solid grey;
+    padding: 2% 2%;
+    margin: 1%;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    left: 2vw;
+    height: 400px;
+  }
+
+  .userCodes>h2{
+    font-size: 2vw;
+  }
+
+  .add{
+    top: -2vh;
+    left: 1vw;
+    border: none;
+    background: white;
+    color: blue;
+  }
+
+  .delete{
+    position: absolute;
+    top: -1vh;
+    right: 1vw;
+    border: none;
+    background: white;
+    color: red;
+    font-size: 30px;
+  }
+
+  .delete-file{
+    border: none;
+    background-color: white;
+    color: red;
+    font-size: 180%;
+  }
+  .editImg{
+    width: 1.5vw;
+    /*left: 1vw;*/
+    position: relative;
+    transform: translate(-50%,-20%);
+  }
+
+  .uploads>a>h6{
+    font-size: 1vw;
+  }
+
+  .left-angle{
+    width: 60vw;
+    height: 10vh;
+    margin: 0 0 0 -135px;
+    -webkit-transform: skew(-20deg);
+       -moz-transform: skew(-20deg);
+         -o-transform: skew(-20deg);
+    background: black;
+    /*border-right: 2px solid grey*/
+  }
+  .left-angle > h1{
+    position: absolute;
+    left: 33vw;
+    top: 50%;
+    transform: translate(-50%,-85%);
+    font-size: 4vw;
+  }
+
+  .right-angle{
+    position: absolute;
+    width: 100vw;
+    height: 10vh;
+    background-color: grey;
+  }
+  .right-angle > h1{
+    position: absolute;
+    right: 0vw;
+    top: 50%;
+    transform: translate(-50%,-85%);
+    font-size: 4vw;
+  }
+
+}

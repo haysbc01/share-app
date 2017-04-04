@@ -1,3 +1,4 @@
+
 .right{
   float: right;
 }
@@ -25,15 +26,119 @@ form {
   display: inline-block;
 }
 
+
+
+.newModal{
+  width: 50vw;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  background-color: black;
+}
+
+.background{
+  background-color: grey;
+  opacity: 30;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+}
+
+.left-select {
+  width: 100vw;
+  height: 35vh;
+  background: grey;
+  cursor: pointer;
+}
+
+.left-select > h1{
+  left: 50%;
+  top: 25%;
+  transform: translate(-50%,-50%);
+  position: absolute;
+  text-align: center;
+}
+
+.right-select{
+  width: 100vw;
+  height: 35vh;
+  background: black;
+  cursor: pointer;
+
+}
+
+.right-select > h1{
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%,-50%);
+  position: absolute;
+  text-align: center;
+}
+
+/*.uploadedFiles{
+  display: inline-block;
+}*/
+
+.uploads{
+  display: inline-block;
+  position: relative;
+}
+
+.uploads>a>h6{
+  font-size: 3vw;
+
+}
+
+.blockButtons{
+  display: inline-block;
+  float: right;
+}
+/*.blockButtons>button{
+  width: 12vw;
+}*/
+
+
+
+/*.left-angle{
+  position: absolute;
+  width: 50vw;
+  height: 10vh;
+  background: black;
+}
+.left-angle > h1{
+  position: relative;
+  left: 10%;
+  top: 10%;
+  font-size: 250%;
+}
+
+.right-angle{
+  position: absolute;
+  width: 50vw;
+  height: 10vh;
+  left: 50vw;
+  background-color: grey;
+}
+.right-angle > h1{
+  position: relative;
+  left: 10%;
+  top: 10%;
+  font-size: 250%;
+}*/
+
+.blockTitle{
+  border-bottom: 1px solid black;
+}
 .userCodes {
   border: 1px solid grey;
-  padding: 1% 2%;
-  margin: 1%;
+  padding: 2% 2%;
+  margin: 8%;
   border-radius: 5px;
-  width: 30%;
+  width: 80%;
   position: relative;
   left: 2vw;
-  height: 45vh;
+  height: 420px;
 }
 
 .userCodes>h2{
@@ -57,130 +162,27 @@ form {
   color: red;
 }
 
-
-
-.newModal{
-  width: 50vw;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  background-color: black;
-}
-
-.background{
-  background-color: grey;
-  opacity: 30;
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-}
-
-.left-select > h1{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-}
-
-.right-select{
-  position: absolute;
-  width: 62vw;
-  height: 70vh;
-  left: 38vw;
-  background-color: grey;
-  /*transform: rotate(0deg) scale(1) skew(-30deg) translate(0px);*/
-
-}
-.left-select {
-  width: 60vw;
-    height: 70vh;
-    margin: 0 0 0 -135px;
-    -webkit-transform: skew(-20deg);
-       -moz-transform: skew(-20deg);
-         -o-transform: skew(-20deg);
-    background: black;
-    position:absolute;
-}
-
-.right-select > h1{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-}
-
-/*.uploadedFiles{
-  display: inline-block;
-}*/
-
-.uploads{
-  display: inline-block;
-  position: relative;
-}
-
-.uploads>a>h6{
-  font-size: 1vw;
-
-}
-
-.blockButtons{
-  display: inline-block;
-  float: right;
-}
-/*.blockButtons>button{
-  width: 12vw;
-}*/
-
 .delete-file{
   border: none;
   background-color: white;
   color: red;
-  font-size: 2vw;
-  position: absolute;
+  font-size: 150%;
   left: 23vw;
 }
 
 .editImg{
-  width: 2vw;
-  top: 1vh;
-  left: 1vw;
+  width: 3vw;
+  /*left: 1vw;*/
   position: relative;
   transform: translate(-50%,-20%);
 }
 
-.left-angle{
-  width: 60vw;
-    height: 10vh;
-    margin: 0 0 0 -135px;
-    -webkit-transform: skew(-20deg);
-       -moz-transform: skew(-20deg);
-         -o-transform: skew(-20deg);
-    background: black;
-    /*border-right: 2px solid grey*/
-}
-.left-angle > h1{
-  position: absolute;
-  left: 33vw;
-  top: 50%;
-  transform: translate(-50%,-85%);
-  font-size: 4vw;
-}
-
-.right-angle{
-  position: absolute;
+.moreBlocks{
+  bottom: 0vh;
   width: 100vw;
-  height: 10vh;
-  background-color: grey;
-}
-.right-angle > h1{
-  position: absolute;
-  right: 0vw;
-  top: 50%;
-  transform: translate(-50%,-85%);
-  font-size: 4vw;
+  height: 8vh;
+  font-size: 200%;
+  /*position: absolute;*/
 }
 
-.blockTitle{
-  border-bottom: 1px solid black;
 }

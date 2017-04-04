@@ -77,25 +77,41 @@ edit : (req,res)=>{
 add : (req,res)=>{
   // console.log(req.files);
   Share.findOne({_id: (req.params.id)}, (err,files)=>{
-    console.log(req.files.files)
+    console.log('req.files.files'.yellow,req.files)
 
-    for(var key in req.files.files){
-      var file = req.files.files[key];
-      // var fileName = file.name;
-      var path = `./public/img/Block-${Date.now()}-${file.name}`;
-      // console.log(file);
-      var fileType = file.name.slice((file.name.lastIndexOf('.'))+1,file.name.length);
-      var fileTypePath = `./docIMG/${fileType}.png`
-      var data = fs.readFileSync(file.path)
-      fs.writeFileSync(`${path}`, data);
+    if(req.files.files.length){
+      for(var key in req.files.files){
+        console.log(req.files.files[key])
+        var file = req.files.files[key];
+        var path = `./public/img/Block-${Date.now()}-${file.name}`;
+        var fileType = file.name.slice((file.name.lastIndexOf('.'))+1,file.name.length);
+        var fileTypePath = `./docIMG/${fileType}.png`
+        var data = fs.readFileSync(file.path)
+        fs.writeFileSync(`${path}`, data);
 
-      files.files.push({
-        name : file.name,
-        fileType : fileType,
-        fileTypePath : fileTypePath,
-        path : path,
-      })
-}
+        files.files.push({
+          name : file.name,
+          fileType : fileType,
+          fileTypePath : fileTypePath,
+          path : path,
+        })
+      }
+  }
+  else{ // one file
+    var file = req.files.files
+    var path = `./public/img/Block-${Date.now()}-${file.name}`;
+    var fileType = file.name.slice((file.name.lastIndexOf('.'))+1,file.name.length);
+    var fileTypePath = `./docIMG/${fileType}.png`
+    var data = fs.readFileSync(file.path)
+    fs.writeFileSync(`${path}`, data);
+
+    files.files.push({
+      name : file.name,
+      fileType : fileType,
+      fileTypePath : fileTypePath,
+      path : path,
+    })
+  }
 
 files.markModified('files');
 files.save();

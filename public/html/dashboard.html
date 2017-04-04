@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/600.css">
   </head>
   <body >
 
@@ -22,31 +23,72 @@
         <div class="navbar-header right">
           <a href="/"><h3 class="col-xs-4">Home</h3></a>
           <h3 class="col-xs-4">How it Works</h3>
-          <a href="/dashboard"><h3 class="col-xs-4" ng-show='share.data'>My Profile</h3></a>
-          <a href="/auth"><h3 class="col-xs-4" ng-hide='share.data'>Login / Signup</h3></a>
+          <a href="/logout"><h3 class="col-xs-4" ng-show='share.data'>logout</h3></a>
+          <!-- <a href="/auth"><h3 class="col-xs-4" ng-hide='share.data'>Login / Signup</h3></a> -->
         </div>
       </div>
     </nav>
 
-    <div class="right-angle" ng-click='download =! download' ng-hide='share.upload || download'><h1>Download Files</h1></div>
-    <div class="left-angle" ng-click='share.upload =! share.upload' ng-hide='share.upload || download'><h1>Upload Files</h1></div>
 
-    <!-- <div ng-class="{'background': share.upload || share.download}"> -->
+      <div class="right-angle" ng-click='download =! download' ><h1>Download Files</h1></div>
+      <div class="left-angle" ng-click='upload =! upload' ><h1>Upload Files</h1></div>
 
-
-    <div ng-controller='dashController as dash' g-hide='share.upload || download'>
+      <!-- <div ng-class="{'background': share.upload || share.download}"></div> -->
 
 
-      <a href="/logout"><h3>logout</h3></a>
+    <div ng-controller='dashController as dash' ng-hide='upload || download'>
+
       <h1>{{dash.greeting}} {{dash.data.email}}</h1>
+
+      <div class="containner">
+        <div class="row">
+          <div class="col-xs-3 userCodes" ng-repeat='uploads in dash.files | limitTo: dash.blockLimit'>
+
+            <h1 class='delete' ng-click='dash.deleteBlock(uploads._id,uploads.files)' alt='Delete this Block'>X</h1>
+            <h1 class='add' ngf-select='dash.addToBlock(uploads._id,dash.newfiles)' multiple ngf-multiple=true ng-model='dash.newfiles'>+</h1>
+            <div class="blockTitle">
+
+              <h3 ng-model='dCode'>Download Code: {{uploads.downloadCode}}</h3>
+              <h4>Date Created: {{uploads.createdAt | date}}</h4>
+            </div>
+            <div class="uploadedFiles" ng-repeat='files in uploads.files | limitTo: dash.limit'>
+            <div class="uploads">
+              <a href="/download?path={{files.path}}" download='{{files.name}}'><h6 ng-hide='name'><img class='icon' ng-src="{{files.fileTypePath}}" alt=""> {{files.name | limitTo:25}}</h6></a>
+
+            </div>
+            <input type="text" name="" value="" placeholder="{{files.name}}" ng-show='name' ng-model='newName'>
+
+            <div class="blockButtons">
+
+              <img class='editImg' src='/docIMG/edit-button.png' ng-click='name =! name' ng-hide='name'>
+              <button class='delete-file' ng-click='dash.delete(uploads._id, files)' ng-hide='name'>X</button>
+
+              <button type="button" name="button" ng-click='dash.editName(uploads._id,files,newName)' ng-show='name'>submit name</button>
+              <button type="button" name="button" ng-click='name =! name' ng-show='name'>cancel</button>
+              <!-- <button type="button" name="button" ng-hide='name'>view</button> -->
+            </div>
+        </div>
+          <button type="button" name="button" ng-click='dash.moreFiles()' ng-if='uploads.files.length > dash.limit'>Show 5 more Files in this Block</button>
+        </div>
+      </div>
     </div>
+
+    <button class='moreBlocks' type="button" name="button" ng-click='dash.moreBlocks()' ng-if='dash.files.length > dash.blockLimit'>Show More Blocks</button>
+  </div>
+
+
+
+
+
+
+
 
     <div class="container" ng-controller='shareController as share'>
       <div class="row">
 
 
-      <form class="newModal" ngf-drop multiple ng-model='share.newfiles' ng-show='share.upload'>
-        <h1 ng-click='share.upload =! share.upload'>X</h1>
+      <form class="newModal" ngf-drop multiple ng-model='share.newfiles' ng-show='upload'>
+        <h1 ng-click='upload =! upload'>X</h1>
         <div class="form-group">
           <!-- <button class="drop-box" ngf-drop multiple ng-model='share.newfiles'>Drag and Drop</button> -->
           <h3>Drag and Drop anywhere</h3>
@@ -102,47 +144,6 @@
       </div>
     </div>
 
-<div ng-hide='share.upload || download'>
 
-
-
-      <div ng-controller='dashController as dash'>
-        <div class="containner">
-          <div class="row">
-            <div class="col-sm-3 userCodes" ng-repeat='uploads in dash.files | limitTo: dash.boxLimit'>
-
-              <button class='delete' ng-click='dash.deleteBlock(uploads._id,uploads.files)' alt='Delete this Block'>X</button>
-              <button class='add' ngf-select='dash.addToBlock(uploads._id,dash.newfiles)' multiple ng-model='dash.newfiles'>+</button>
-              <div class="blockTitle">
-
-                <h2>Download Code: {{uploads.downloadCode}}</h2>
-                <h4>Date Created: {{uploads.createdAt | date}}</h4>
-              </div>
-              <div class="uploadedFiles" ng-repeat='files in uploads.files | limitTo: dash.limit'>
-              <div class="uploads">
-                <a href="/download?path={{files.path}}" download='{{files.name}}'><h6 ng-hide='name'><img class='icon' ng-src="{{files.fileTypePath}}" alt=""> {{files.name | limitTo:30}}</h6></a>
-
-              </div>
-              <input type="text" name="" value="" placeholder="{{files.name}}" ng-show='name' ng-model='newName'>
-
-              <div class="blockButtons">
-
-                <button class='delete-file' ng-click='dash.delete(uploads._id, files)' ng-hide='name'>X</button>
-                <img class='editImg' src='/docIMG/edit-button.png' ng-click='name =! name' ng-hide='name'>
-                <button type="button" name="button" ng-click='dash.editName(uploads._id,files,newName)' ng-show='name'>submit name</button>
-                <button type="button" name="button" ng-click='name =! name' ng-show='name'>cancel</button>
-                <!-- <button type="button" name="button" ng-hide='name'>view</button> -->
-              </div>
-          </div>
-            <button type="button" name="button" ng-click='dash.moreFiles()' ng-if='uploads.files.length > dash.limit'>Show 5 more Files in this Block</button>
-          </div>
-        </div>
-      </div>
-      <button type="button" name="button"></button>
-      </div>
-
-      </div>
-
-</div>
   </body>
 </html>

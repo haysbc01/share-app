@@ -7,7 +7,7 @@ function dashCtrl ($http, dashFactory){
   var dash = this;
   dash.greeting = 'Hello again';
   dash.limit = 5;
-  dash.boxLimit = 3;
+  dash.blockLimit = 3;
 
   dash.load = function(){
     dashFactory
@@ -43,9 +43,12 @@ function dashCtrl ($http, dashFactory){
   }
 
   dash.deleteBlock = function(id, files){
+    if(confirm('This will delete this block and files permenantly.\nDo you wish to continue?')){
     dashFactory
       .deleteBlock(id,files)
       .then(dash.load)
+    }
+
   }
 
   dash.editName = function(id,files,name){
@@ -55,6 +58,7 @@ function dashCtrl ($http, dashFactory){
   }
 
   dash.addToBlock = function(block,files){
+
     console.log(files)
     dashFactory
       .addFiles(block,files)
@@ -63,6 +67,10 @@ function dashCtrl ($http, dashFactory){
 
   dash.moreFiles = function(){
     dash.limit += 5
+  }
+
+  dash.moreBlocks = function(){
+    dash.blockLimit += 6
   }
 
 

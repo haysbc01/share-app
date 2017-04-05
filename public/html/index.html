@@ -20,15 +20,18 @@
     <link rel="stylesheet" href="/css/600.css">
   </head>
   <body ng-controller='shareController as share'>
+    <div class="" ng-controller='authController as auth'>
+
+
 <!-- <div ng-class="{'background': upload || download}"> -->
 
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
-        <div class="navbar-header right">
+        <div class="navbar-header">
           <a href="/"><h3 class="col-xs-6 ">Home</h3></a>
           <!-- <h3 class="col-xs-4">How it Works</h3> -->
           <a href="/dashboard"><h3 class="col-xs-6 " ng-show='share.data'>My Profile</h3></a>
-          <a href='/auth'><h3 class="col-xs-6 " ng-hide='share.data' >Login/Signup</h3></a>
+          <a><h3 class="col-xs-6 pull-right" ng-hide='share.data' ng-click='auth.show =! auth.show'>Login/Signup</h3></a>
         </div>
       </div>
     </nav>
@@ -58,7 +61,10 @@
         <h6 ng-show='share.data'>size limit 500 MB</h6>
         <h2 ng-show='share.big'>Upload is too big, <a href="/auth">create or sign</a> in to be able to upload up to 500mg</h2>
 
+        <h5 ng-repeat='name in share.newfiles' ng-if='share.newfiles.length < 5'>{{name.name}}</h5>
+      <div class="fileScroll" ng-if='share.newfiles.length > 5'>
         <h5 ng-repeat='name in share.newfiles'>{{name.name}}</h5>
+      </div>
       </div>
 
 
@@ -113,13 +119,12 @@
 
 
 
-<!--
+
 
 <div class="background" ng-show='auth.show'>
 
 
 
-<div ng-controller='authController as auth' >
 
 <form class="register-form" ng-hide='auth.signup'>
   <h1 ng-click='auth.exit()' class='exitCursor'>X</h1>
@@ -143,6 +148,7 @@
 </form>
 
 <form class="register-form" ng-show='auth.signup'>
+  <h1 ng-click='auth.exit()' class='exitCursor'>X</h1>
   <h1>Register</h1>
   <div class="form-group">
 
@@ -165,7 +171,8 @@
  <h3>{{auth.tryAgain}}</h3>
  </div>
 </form>
+
 </div>
-</div> -->
+</div>
   </body>
 </html>

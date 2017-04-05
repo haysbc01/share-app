@@ -36,7 +36,7 @@ var checkIfLoggedIn = function (req, res, next) {
         next();
     } else {
         console.warn('User is not logged in!'.yellow)
-        res.redirect('/auth');
+        res.redirect('/');
     }
   }
 
@@ -54,9 +54,9 @@ app.get('/', (req, res)=>{
   res.sendFile('index.html', {root : './public/html'});
 });
 
-app.get('/auth', (req, res)=>{
-  res.sendFile('auth.html', {root : './public/html'})
-});
+// app.get('/auth', (req, res)=>{
+//   res.sendFile('auth.html', {root : './public/html'})
+// });
 
 app.get('/dashboard',checkIfLoggedIn, (req,res)=>{
   res.sendFile('dashboard.html', {root : './public/html'})

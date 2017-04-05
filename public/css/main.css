@@ -231,4 +231,9 @@ form {
 .right>a>h3{
   color: white;
 }
+
+.fileScroll{
+  overflow: scroll;
+  height: 100px;
+}
 }

@@ -56,5 +56,6 @@ function authCtrl ($http, authFactory){
 
   auth.exit = function(){
     auth.show = false;
+    auth.signup = false;
   }
 }

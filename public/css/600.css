@@ -10,20 +10,20 @@
 
   .right-select > h1{
     position: absolute;
-    left: 75%;
-    top: 46%;
+    left: 74%;
+    top: 68%;
     transform: translate(-50%,-50%);
-    font-size: 500%;
+    font-size: 11.5vw;
     color: black;
   }
 
   .left-select > h1{
     position: absolute;
-    left: 45%;
-    top: 38%;
+    left: 32%;
+    top: 12%;
     transform: translate(-50%,-50%);
     -webkit-transform: skew(20deg);
-    font-size: 500%;
+    font-size: 13vw;
     color: white;
   }
 

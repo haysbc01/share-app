@@ -28,7 +28,7 @@
           <a href="/"><h3 class="col-xs-6 ">Home</h3></a>
           <!-- <h3 class="col-xs-4">How it Works</h3> -->
           <a href="/dashboard"><h3 class="col-xs-6 " ng-show='share.data'>My Profile</h3></a>
-          <a hret='/auth'><h3 class="col-xs-6 " ng-hide='share.data' >Login/Signup</h3></a>
+          <a href='/auth'><h3 class="col-xs-6 " ng-hide='share.data' >Login/Signup</h3></a>
         </div>
       </div>
     </nav>
@@ -92,7 +92,7 @@
       <button type="submit" class="btn btn-default" ng-click='share.downloadWithPass()' ng-show='share.downloadPassword'>Submit</button>
       <br>
       <h5>{{share.noDice}}</h5>
-      
+
       <div class="contianer">
         <div class="row">
           <div ng-repeat='file in share.dataFiles.files' class='col-xs-4'>

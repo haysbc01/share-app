@@ -30,16 +30,15 @@ form {
 
 .newModal{
   width: 50vw;
-  position: fixed;
+  position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
-  background-color: black;
+  transform: translate(-50%,-60%);
+  background-color: white;
 }
 
 .background{
-  background-color: grey;
-  opacity: 30;
+  background-color: rgba(222, 222, 222, 0.91);
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -114,6 +113,7 @@ form {
   left: 10%;
   top: 10%;
   font-size: 250%;
+  color: white;
 }
 
 .right-angle{
@@ -121,13 +121,14 @@ form {
   width: 50vw;
   height: 10vh;
   left: 50vw;
-  background-color: grey;
+  background-color: white;
 }
 .right-angle > h1{
   position: relative;
   left: 10%;
   top: 10%;
   font-size: 250%;
+  color: black;
 }
 
 .blockTitle{
@@ -188,4 +189,19 @@ form {
   /*position: absolute;*/
 }
 
+.showMore{
+  position: absolute;
+  height: 30px;
+  width: 100%;
+  bottom: 0%;
+  border-radius: 0 0 5px 5px;
+  color: white;
+  background-color: black;
+  left: 0;
+}
+
+.scroll{
+  overflow: scroll;
+  height: 260px;
+}
 }

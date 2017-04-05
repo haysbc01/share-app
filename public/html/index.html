@@ -31,13 +31,14 @@
       </div>
     </nav>
 
-    <div ng-class="{'background': upload || download}">
 <!-- <div class="container">
   <div class="row"> -->
 
 <!-- <div class='left-select'  ng-click='upload =! upload' ng-hide='upload || download'><h1>Share Files</h1></div> -->
-<div class='right-select' ng-click='download =! download' ng-hide='upload || download'><h1>Download Files</h1></div>
-<div class='left-select'  ng-click='upload =! upload' ng-hide='upload || download'><h1>Share Files</h1></div>
+<div class='right-select' ng-click='download =! download' g-hide='upload || download'><h1>Download</h1></div>
+<div class='left-select'  ng-click='upload =! upload' g-hide='upload || download'><h1>Upload</h1></div>
+
+  <div ng-class="{'background': upload || download}"></div>
 
     <form class="newModal" ngf-drop multiple ng-model='share.newfiles' ng-show='upload'>
       <h1 ng-click='upload =! upload'>X</h1>
@@ -47,8 +48,8 @@
         <h6>or</h6>
 
         <button ngf-select multiple ng-model='share.newfiles'>Select Files</button>
-        <h6 ng-hide='share.data'>size limit 100mg</h6>
-        <h6 ng-show='share.data'>size limit 500mg</h6>
+        <h6 ng-hide='share.data'>size limit 100 MB</h6>
+        <h6 ng-show='share.data'>size limit 500 MB</h6>
         <h2 ng-show='share.big'>Upload is too big, <a href="/auth">create or sign</a> in to be able to upload up to 500mg</h2>
 
         <h5 ng-repeat='name in share.newfiles'>{{name.name}}</h5>

@@ -4,23 +4,27 @@
     position: absolute;
     width: 100vw;
     height: 70vh;
-    background-color: grey;
+    background-color: white;
     /*transform: rotate(0deg) scale(1) skew(-30deg) translate(0px);*/
   }
 
   .right-select > h1{
     position: absolute;
     left: 75%;
-    top: 50%;
+    top: 46%;
     transform: translate(-50%,-50%);
+    font-size: 500%;
+    color: black;
   }
 
   .left-select > h1{
     position: absolute;
     left: 45%;
-    top: 47%;
+    top: 40%;
     transform: translate(-50%,-50%);
-    -webkit-transform: skew(20deg)
+    -webkit-transform: skew(20deg);
+    font-size: 500%;
+    color: white;
   }
 
   .left-select {
@@ -85,22 +89,24 @@
 
   .left-angle{
     position: relative;
-    width: 60vw;
+    width: 65vw;
     height: 10vh;
     margin: 0 0 0 -135px;
     -webkit-transform: skew(-20deg);
        -moz-transform: skew(-20deg);
          -o-transform: skew(-20deg);
     background: black;
+    cursor: pointer;
     /*border-right: 2px solid grey*/
   }
   .left-angle > h1{
     position: absolute;
     left: 25vw;
-    top: ;
+    top: 0%;
     /*transform: translate(-50%,-85%);*/
-    font-size: 4vw;
+    font-size: 300%;
     transform: skewX(20deg);
+    color: white;
   }
 
   .right-angle{
@@ -108,15 +114,17 @@
     width: 100vw;
     height: 10vh;
     left:0vw;
-    background-color: grey;
+    background-color: white;
+    cursor: pointer;
   }
   .right-angle > h1{
     position: absolute;
     right: ;
-    left: 64vw;
-    /*top: 50%;*/
+    left: 60vw;
+    top: 0%;
     /*transform: translate(-50%,-85%);*/
-    font-size: 4vw;
+    font-size: 300%;
+    color: black;
   }
 
 }

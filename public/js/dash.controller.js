@@ -6,7 +6,7 @@ dashCtrl.$inject = ['$http', 'dashFactory'];
 function dashCtrl ($http, dashFactory){
   var dash = this;
   dash.greeting = 'Hello again';
-  dash.limit = 5;
+  // dash.limit = 5;
   dash.blockLimit = 3;
 
   dash.load = function(){
@@ -65,8 +65,13 @@ function dashCtrl ($http, dashFactory){
       .then(dash.load)
   }
 
-  dash.moreFiles = function(){
-    dash.limit += 5
+  dash.moreFiles = function(block){
+    block.limit = block.limit || 5
+    block.limitTimes = block.limitTimes || 1
+    block.limit += 5
+    block.limitTimes++
+    console.log(block.limit, block.limitTimes);
+    
   }
 
   dash.moreBlocks = function(){

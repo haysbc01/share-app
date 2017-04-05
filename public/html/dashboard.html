@@ -30,8 +30,8 @@
     </nav>
 
       <div class="angles">
-      <div class="right-angle" ng-click='download =! download' ><h1>Download Files</h1></div>
-      <div class="left-angle" ng-click='upload =! upload' ><h1>Upload Files</h1></div>
+      <div class="right-angle" ng-click='download =! download' ><h1>Download</h1></div>
+      <div class="left-angle" ng-click='upload =! upload' ><h1>Upload</h1></div>
     </div>
 
       <!-- <div ng-class="{'background': share.upload || share.download}"></div> -->
@@ -52,7 +52,10 @@
               <h3 ng-model='dCode'>Download Code: {{uploads.downloadCode}}</h3>
               <h4>Date Created: {{uploads.createdAt | date}}</h4>
             </div>
-            <div class="uploadedFiles" ng-repeat='files in uploads.files | limitTo: dash.limit'>
+            <div class="scroll">
+            <div class="uploadedFiles" ng-repeat='files in uploads.files'>
+
+
             <div class="uploads">
               <a href="/download?path={{files.path}}" download='{{files.name}}'><h6 ng-hide='name'><img class='icon' ng-src="{{files.fileTypePath}}" alt=""> {{files.name | limitTo:25}}</h6></a>
 
@@ -68,8 +71,9 @@
               <button type="button" name="button" ng-click='name =! name' ng-show='name'>cancel</button>
               <!-- <button type="button" name="button" ng-hide='name'>view</button> -->
             </div>
+            </div>
         </div>
-          <button type="button" name="button" ng-click='dash.moreFiles()' ng-if='uploads.files.length > dash.limit'>Show 5 more Files in this Block</button>
+          <!-- <button class='showMore' type="button" name="button" ng-click='dash.moreFiles(uploads)' ng-if='uploads.files.length > block.limit || 5'>Show More Files</button> -->
         </div>
       </div>
     </div>
@@ -96,8 +100,8 @@
           <h6>or</h6>
 
           <button ngf-select multiple ng-model='share.newfiles'>Select Files</button>
-          <h6 ng-hide='share.data'>size limit 100mg</h6>
-          <h6 ng-show='share.data'>size limit 500mg</h6>
+          <h6 ng-hide='share.data'>size limit 100 MB</h6>
+          <h6 ng-show='share.data'>size limit 500 MB</h6>
           <h2 ng-show='share.big'>Upload is too big, <a href="/auth">create or sign</a> in to be able to upload up to 500mg</h2>
 
           <h5 ng-repeat='name in share.newfiles'>{{name.name}}</h5>

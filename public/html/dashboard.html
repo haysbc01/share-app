@@ -18,82 +18,31 @@
   </head>
   <body >
 
+
+
     <nav class="navbar navbar-inverse" ng-controller='shareController as share'>
       <div class="container-fluid">
         <div class="navbar-header right">
-          <a href="/"><h3 class="col-xs-4">Home</h3></a>
-          <h3 class="col-xs-4">How it Works</h3>
-          <a href="/logout"><h3 class="col-xs-4" ng-show='share.data'>logout</h3></a>
+          <a href="/"><h3 class="col-xs-6">Home</h3></a>
+          <!-- <h3 class="col-xs-4">How it Works</h3> -->
+          <a href="/logout"><h3 class="col-xs-6">logout</h3></a>
           <!-- <a href="/auth"><h3 class="col-xs-4" ng-hide='share.data'>Login / Signup</h3></a> -->
         </div>
       </div>
     </nav>
 
-      <div class="angles">
-      <div class="right-angle" ng-click='download =! download' ><h1>Download</h1></div>
-      <div class="left-angle" ng-click='upload =! upload' ><h1>Upload</h1></div>
+    <div class="" ng-controller='shareController as share'>
+
+    <div class="angles">
+      <div class="right-angle" ng-click='share.download =! share.download' ><h1>Download</h1></div>
+      <div class="left-angle" ng-click='share.upload =! share.upload' ><h1>Upload</h1></div>
+
     </div>
 
-      <!-- <div ng-class="{'background': share.upload || share.download}"></div> -->
+    <div ng-class="{'background': share.upload || share.download}">
 
-
-    <div ng-controller='dashController as dash' ng-hide='upload || download'>
-
-      <h1>{{dash.greeting}} {{dash.data.email}}</h1>
-
-      <div class="containner">
-        <div class="row">
-          <div class="col-xs-3 userCodes" ng-repeat='uploads in dash.files | limitTo: dash.blockLimit'>
-
-            <h1 class='delete' ng-click='dash.deleteBlock(uploads._id,uploads.files)' alt='Delete this Block'>X</h1>
-            <h1 class='add' ngf-select='dash.addToBlock(uploads._id,dash.newfiles)' multiple ngf-multiple=true ng-model='dash.newfiles'>+</h1>
-            <div class="blockTitle">
-
-              <h3 ng-model='dCode'>Download Code: {{uploads.downloadCode}}</h3>
-              <h4>Date Created: {{uploads.createdAt | date}}</h4>
-            </div>
-            <div class="scroll">
-            <div class="uploadedFiles" ng-repeat='files in uploads.files'>
-
-
-            <div class="uploads">
-              <a href="/download?path={{files.path}}" download='{{files.name}}'><h6 ng-hide='name'><img class='icon' ng-src="{{files.fileTypePath}}" alt=""> {{files.name | limitTo:25}}</h6></a>
-
-            </div>
-            <input type="text" name="" value="" placeholder="{{files.name}}" ng-show='name' ng-model='newName'>
-
-            <div class="blockButtons">
-
-              <img class='editImg' src='/docIMG/edit-button.png' ng-click='name =! name' ng-hide='name'>
-              <button class='delete-file' ng-click='dash.delete(uploads._id, files)' ng-hide='name'>X</button>
-
-              <button type="button" name="button" ng-click='dash.editName(uploads._id,files,newName)' ng-show='name'>submit name</button>
-              <button type="button" name="button" ng-click='name =! name' ng-show='name'>cancel</button>
-              <!-- <button type="button" name="button" ng-hide='name'>view</button> -->
-            </div>
-            </div>
-        </div>
-          <!-- <button class='showMore' type="button" name="button" ng-click='dash.moreFiles(uploads)' ng-if='uploads.files.length > block.limit || 5'>Show More Files</button> -->
-        </div>
-      </div>
-    </div>
-
-    <button class='moreBlocks' type="button" name="button" ng-click='dash.moreBlocks()' ng-if='dash.files.length > dash.blockLimit'>Show More Blocks</button>
-  </div>
-
-
-
-
-
-
-
-
-    <div class="container" ng-controller='shareController as share'>
-      <div class="row">
-
-
-      <form class="newModal" ngf-drop multiple ng-model='share.newfiles' ng-show='upload'>
-        <h1 ng-click='upload =! upload'>X</h1>
+      <form class="newModal" ngf-drop multiple ng-model='share.newfiles' ng-show='share.upload'>
+        <h1 ng-click='share.exit()' class='exitCursor'>X</h1>
         <div class="form-group">
           <!-- <button class="drop-box" ngf-drop multiple ng-model='share.newfiles'>Drag and Drop</button> -->
           <h3>Drag and Drop anywhere</h3>
@@ -116,9 +65,8 @@
        <div class="form-group">
          <label for="downloadCode">Download Code *</label>
          <input ng-class='{red: share.checkCode === true}' class="form-control" id="downloadCode" placeholder="Download Code *" ng-model='share.downloadCode'>
-         <input type="checkbox" ng-click='password =! password'>
-         <h6>password protect your download **</h6>
-         <input type="text" class='form-control' placeholder='Download Code Password' ng-show='password'>
+         <input type="checkbox" ng-click='share.showPassword =! share.showPassword' ng-model='share.checkPass'> password protect your download **
+         <input type="password" class='form-control' placeholder='Download Code Password' ng-show='share.showPassword' ng-model='share.password'>
        </div>
 
        <button type="submit" class="btn btn-default" ng-click='share.submit()'>Submit</button>
@@ -126,14 +74,126 @@
       </form>
 
 
-      <form class="newModal" ng-show='download'>
-        <h1 ng-click='download =! download'>X</h1>
+      <form class="newModal" ng-show='share.download'>
+        <h1 ng-click='share.exit()' class='exitCursor'>X</h1>
         <div class="form-group">
           <label for="fetchCode" >Enter a Download Code</label>
           <input ng-class='{red: share.noCode === true}' class='form-control' placeholder='{{share.userCodePlaceHolder}}' ng-model='share.userCode'>
+          <label for="downloadPassword" ng-show='share.downloadPassword'>This download is password protected</label>
+          <input type='password' class="form-control" placeholder="{{share.passwordPlaceholder}}" ng-show='share.downloadPassword' ng-model='share.downloadPass'>
 
         </div>
-        <button type="submit" class="btn btn-default" ng-click='share.download()'>Submit</button>
+        <button type="submit" class="btn btn-default" ng-click='share.downloadFiles()' ng-hide='share.downloadPassword'>Submit</button>
+        <button type="submit" class="btn btn-default" ng-click='share.downloadWithPass()' ng-show='share.downloadPassword'>Submit</button>
+        <br>
+        <h5>{{share.noDice}}</h5>
+        <div ng-repeat='file in share.dataFiles.files'>
+
+        <a href='/download?path={{file.path}}' download='{{file.name}}'><h5><img class='icon' ng-src="{{file.fileTypePath}}" alt=""> {{file.name}}</h5></a>
+
+        </div>
+      </form>
+      </div>
+</div>
+
+
+
+
+
+    <div ng-controller='dashController as dash' g-hide='upload || download'>
+
+      <h1>{{dash.greeting}} {{dash.data.email}}</h1>
+
+      <div class="containner">
+        <div class="row">
+          <div class="col-xs-3 userCodes" ng-repeat='uploads in dash.files | limitTo: dash.blockLimit'>
+
+            <h1 class='delete exitCursor' ng-click='dash.deleteBlock(uploads._id,uploads.files)' alt='Delete this Block'>X</h1>
+            <h1 class='add exitCursor' ngf-select='dash.addToBlock(uploads._id,dash.newfiles)' multiple ngf-multiple=true ng-model='dash.newfiles'>+</h1>
+            <div class="blockTitle">
+
+              <h3 ng-model='dCode'>Download Code: {{uploads.downloadCode}}</h3>
+              <h4>Date Created: {{uploads.createdAt | date}}</h4>
+            </div>
+            <div class="scroll">
+            <div class="uploadedFiles" ng-repeat='files in uploads.files'>
+
+
+            <div class="uploads">
+              <a href="/download?path={{files.path}}" download='{{files.name}}'><h6 ng-hide='name'><img class='icon' ng-src="{{files.fileTypePath}}" alt=""> {{files.name | limitTo:25}}</h6></a>
+
+            </div>
+            <input type="text" name="" value="" placeholder="{{files.name}}" ng-show='name' ng-model='newName'>
+
+            <div class="blockButtons">
+
+              <img class='editImg exitCursor' src='/docIMG/edit-button.png' ng-click='name =! name' ng-hide='name'>
+              <button class='delete-file' ng-click='dash.delete(uploads._id, files)' ng-hide='name'>X</button>
+
+              <button type="button" name="button" ng-click='dash.editName(uploads._id,files,newName)' ng-show='name'>submit name</button>
+              <button type="button" name="button" ng-click='name =! name' ng-show='name'>cancel</button>
+              <!-- <button type="button" name="button" ng-hide='name'>view</button> -->
+            </div>
+            </div>
+        </div>
+          <!-- <button class='showMore' type="button" name="button" ng-click='dash.moreFiles(uploads)' ng-if='uploads.files.length > block.limit || 5'>Show More Files</button> -->
+        </div>
+      </div>
+    </div>
+
+    <button class='moreBlocks' type="button" name="button" ng-click='dash.moreBlocks()' ng-if='dash.files.length > dash.blockLimit'>Show More Blocks</button>
+  </div>
+
+<div class="" ng-controller='shareController as share'>
+
+
+
+    <div ng-class="{'background': share.upload || share.download}"></div>
+
+      <form class="newModal" ngf-drop multiple ng-model='share.newfiles' ng-show='share.upload'>
+        <h1 ng-click='share.exit()' class='exitCursor'>X</h1>
+        <div class="form-group">
+          <!-- <button class="drop-box" ngf-drop multiple ng-model='share.newfiles'>Drag and Drop</button> -->
+          <h3>Drag and Drop anywhere</h3>
+          <h6>or</h6>
+
+          <button ngf-select multiple ng-model='share.newfiles'>Select Files</button>
+          <h6 ng-hide='share.data'>size limit 100 MB</h6>
+          <h6 ng-show='share.data'>size limit 500 MB</h6>
+          <h2 ng-show='share.big'>Upload is too big, <a href="/auth">create or sign</a> in to be able to upload up to 500mg</h2>
+
+          <h5 ng-repeat='name in share.newfiles'>{{name.name}}</h5>
+        </div>
+
+
+       <div class="form-group" ng-hide='share.data'>
+         <label for="Email" >Email address *</label>
+         <input type="email" class="form-control" id="Email" placeholder="Email" ng-model='share.email'>
+       </div>
+
+       <div class="form-group">
+         <label for="downloadCode">Download Code *</label>
+         <input ng-class='{red: share.checkCode === true}' class="form-control" id="downloadCode" placeholder="Download Code *" ng-model='share.downloadCode'>
+         <input type="checkbox" ng-click='share.showPassword =! share.showPassword' ng-model='share.checkPass'> password protect your download **
+         <input type="password" class='form-control' placeholder='Download Code Password' ng-show='share.showPassword' ng-model='share.password'>
+       </div>
+
+       <button type="submit" class="btn btn-default" ng-click='share.submit()'>Submit</button>
+       <h6>* = required<br>** = optional</h6>
+      </form>
+
+
+      <form class="newModal" ng-show='share.download'>
+        <h1 ng-click='share.exit()' class='exitCursor'>X</h1>
+        <div class="form-group">
+          <label for="fetchCode" >Enter a Download Code</label>
+          <input ng-class='{red: share.noCode === true}' class='form-control' placeholder='{{share.userCodePlaceHolder}}' ng-model='share.userCode'>
+          <label for="downloadPassword" ng-show='share.downloadPassword'>This download is password protected</label>
+          <input type='password' class="form-control" placeholder="{{share.passwordPlaceholder}}" ng-show='share.downloadPassword' ng-model='share.downloadPass'>
+
+        </div>
+        <button type="submit" class="btn btn-default" ng-click='share.downloadFiles()' ng-hide='share.downloadPassword'>Submit</button>
+        <button type="submit" class="btn btn-default" ng-click='share.downloadWithPass()' ng-show='share.downloadPassword'>Submit</button>
         <br>
         <h5>{{share.noDice}}</h5>
         <div ng-repeat='file in share.dataFiles.files'>
@@ -145,9 +205,9 @@
         <img src="./img/Block-1490729577837-IMG_0027.JPG" alt=""> -->
       </form>
 
+</div>
 
-      </div>
-    </div>
+
 
 
   </body>

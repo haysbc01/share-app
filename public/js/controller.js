@@ -12,6 +12,9 @@ function shareCtrl(Upload, shareFactory, dashFactory){
   share.big = false;
   share.email ='';
   share.insertDownloadCode = 'Download Code';
+  share.passwordPlaceholder = 'Password';
+  share.download = false;
+  share.password = ''
 
   share.submit = function (){
     var array = share.newfiles.map(function(file){return file.size})
@@ -20,18 +23,14 @@ function shareCtrl(Upload, shareFactory, dashFactory){
     size += array[i]
     }
     if (size > share.size){
-      console.log('Thats too much')
       share.big = true
 
     } else{
-      console.log('that works')
     }
     shareFactory
       .checkCode(share.downloadCode)
       .then(function(responseData){
-        console.log(share.downloadCode)
         if(responseData.data.downloadCode){
-          console.log('Code is already being used')
           share.insertDownloadCode = 'This code already exists';
           share.downloadCode = ''
           share.checkCode = true;
@@ -53,7 +52,8 @@ function shareCtrl(Upload, shareFactory, dashFactory){
       .createFile(share.newfiles,{
         email:share.email,
         downloadCode:share.downloadCode,
-        createdBy:shareWho
+        password: share.password,
+        createdBy: shareWho,
       })
       .then(function(responseData){
         dashFactory.getMe()
@@ -62,19 +62,31 @@ function shareCtrl(Upload, shareFactory, dashFactory){
       share.email = '';
       share.downloadCode ='';
       share.checkCode = false;
+      share.upload = false;
+      share.showPassword = false;
+      share.checkPass = false;
+      share.password = '';
     }
 
 
-  share.download = function(){
+  share.downloadFiles = function(){
+    share.dataFiles = '';
 
     shareFactory
       .getDownload(share.userCode)
       .then(function(responseData){
+        // share.dataFiles = responseData.data
+        // console.log(responseData.data)
+        if(responseData.data.password){
+          // share.userCode = responseData.downloadCode
+          // console.log('there is a password')
+          share.downloadPassword = true;
+        } else{
 
-        share.dataFiles = responseData.data
-        // console.log(responseData.data.files.length)
+
         if(responseData.data.files){
-          share.dataFiles = responseData.data
+
+          share.dataFiles = responseData.data;
           // share.noDice = ''
           share.noCode = false;
           share.userCodePlaceHolder = 'Enter a Download Code'
@@ -83,9 +95,28 @@ function shareCtrl(Upload, shareFactory, dashFactory){
         share.noCode = true;
         share.userCodePlaceHolder = 'That is not valid download code'
         }
-        console.log(responseData.data.length)
-      })
-      share.userCode = ''
+      }
+    })
+  }
+
+  share.downloadWithPass = function(){
+    shareFactory
+      .downloadWithPass(share.userCode,share.downloadPass)
+      .then(share.downloadWithPass.success, share.downloadWithPass.error)
+    }
+
+  share.downloadWithPass.success = function(res){
+    share.dataFiles = res.data;
+    share.noCode = false;
+    share.userCodePlaceHolder = 'Enter a Download Code'
+    share.downloadPassword = false;
+    share.downloadPass = '';
+
+  }
+
+  share.downloadWithPass.error = function(res){
+    share.noDice = res.data
+    share.passwordPlaceholder = res.data
   }
 
   share.load = function(){
@@ -101,6 +132,21 @@ function shareCtrl(Upload, shareFactory, dashFactory){
           share.size = 104857600;
         }
       })
+  }
+
+  share.exit = function(){
+    share.downloadPass='';
+    share.download = false;
+    share.userCode = '';
+    share.downloadPassword = false;
+    share.dataFiles = '';
+    share.newfiles = '';
+    share.email = '';
+    share.downloadCode = '';
+    share.password = '';
+    share.upload = false;
+    share.showPassword = false;
+    share.checkPass = false;
   }
   share.load()
 };

@@ -26,13 +26,25 @@ function createFile (files, data){
 function getDownload (downloadCode){
   return $http({
     method: 'GET',
-    url : '/api/files/'+downloadCode
+    url : '/api/files/'+downloadCode,
+  })
+}
+
+function downloadWithPass (downloadCode,password){
+  return $http({
+    method: 'POST',
+    url: '/downloadWithPass',
+    data: {
+      code:downloadCode,
+      password:password
+    }
   })
 }
 
 return{
   createFile : createFile,
   getDownload : getDownload,
-  checkCode : checkCode
+  checkCode : checkCode,
+  downloadWithPass: downloadWithPass,
 }
 }

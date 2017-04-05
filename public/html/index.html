@@ -9,6 +9,8 @@
 
     <script src="./js/module.js" charset="utf-8"></script>
     <script src="./js/controller.js" charset="utf-8"></script>
+    <script src="./js/auth.controller.js" charset="utf-8"></script>
+    <script src="./js/factory.auth.js" charset="utf-8"></script>
     <script src="./js/factory.share.js" charset="utf-8"></script>
     <script src="./js/factory.dash.js" charset="utf-8"></script>
 
@@ -23,25 +25,29 @@
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header right">
-          <a href="/"><h3 class="col-xs-4">Home</h3></a>
-          <h3 class="col-xs-4">How it Works</h3>
-          <a href="/dashboard"><h3 class="col-xs-4" ng-show='share.data'>My Profile</h3></a>
-          <a href="/auth"><h3 class="col-xs-4" ng-hide='share.data'>Login / Signup</h3></a>
+          <a href="/"><h3 class="col-xs-6 ">Home</h3></a>
+          <!-- <h3 class="col-xs-4">How it Works</h3> -->
+          <a href="/dashboard"><h3 class="col-xs-6 " ng-show='share.data'>My Profile</h3></a>
+          <a hret='/auth'><h3 class="col-xs-6 " ng-hide='share.data' >Login/Signup</h3></a>
         </div>
       </div>
     </nav>
+
+    <div >
+
+
 
 <!-- <div class="container">
   <div class="row"> -->
 
 <!-- <div class='left-select'  ng-click='upload =! upload' ng-hide='upload || download'><h1>Share Files</h1></div> -->
-<div class='right-select' ng-click='download =! download' g-hide='upload || download'><h1>Download</h1></div>
-<div class='left-select'  ng-click='upload =! upload' g-hide='upload || download'><h1>Upload</h1></div>
+<div class='right-select' ng-click='share.download =! share.download' g-hide='upload || download'><h1>Download</h1></div>
+<div class='left-select'  ng-click='share.upload =! share.upload' g-hide='upload || download'><h1>Upload</h1></div>
 
-  <div ng-class="{'background': upload || download}"></div>
+  <div ng-class="{'background': share.upload || share.download}">
 
-    <form class="newModal" ngf-drop multiple ng-model='share.newfiles' ng-show='upload'>
-      <h1 ng-click='upload =! upload'>X</h1>
+    <form class="newModal" ngf-drop multiple ng-model='share.newfiles' ng-show='share.upload'>
+      <h1 ng-click='share.exit()' class='exitCursor'>X</h1>
       <div class="form-group">
         <!-- <button class="drop-box" ngf-drop multiple ng-model='share.newfiles'>Drag and Drop</button> -->
         <h3>Drag and Drop anywhere</h3>
@@ -64,9 +70,8 @@
      <div class="form-group">
        <label for="downloadCode">Download Code *</label>
        <input ng-class='{red: share.checkCode === true}' class="form-control" id="downloadCode" placeholder="Download Code *" ng-model='share.downloadCode'>
-       <input type="checkbox" ng-click='password =! password'>
-       <h6>password protect your download **</h6>
-       <input type="text" class='form-control' placeholder='Download Code Password' ng-show='password'>
+       <input type="checkbox" ng-click='share.showPassword =! share.showPassword' ng-model='share.checkPass'> password protect your download **
+       <input type="password" class='form-control' placeholder='Download Code Password' ng-show='share.showPassword' ng-model='share.password'>
      </div>
 
      <button type="submit" class="btn btn-default" ng-click='share.submit()'>Submit</button>
@@ -74,26 +79,93 @@
     </form>
 
 
-    <form class="newModal" ng-show='download'>
-      <h1 ng-click='download =! download'>X</h1>
+    <form class="newModal" ng-show='share.download'>
+      <h1 ng-click='share.exit()' class='exitCursor'>X</h1>
       <div class="form-group">
         <label for="fetchCode" >Enter a Download Code</label>
         <input ng-class='{red: share.noCode === true}' class='form-control' placeholder='{{share.userCodePlaceHolder}}' ng-model='share.userCode'>
+        <label for="downloadPassword" ng-show='share.downloadPassword'>This download is password protected</label>
+        <input type='password' class="form-control" placeholder="{{share.passwordPlaceholder}}" ng-show='share.downloadPassword' ng-model='share.downloadPass'>
 
       </div>
-      <button type="submit" class="btn btn-default" ng-click='share.download()'>Submit</button>
+      <button type="submit" class="btn btn-default" ng-click='share.downloadFiles()' ng-hide='share.downloadPassword'>Submit</button>
+      <button type="submit" class="btn btn-default" ng-click='share.downloadWithPass()' ng-show='share.downloadPassword'>Submit</button>
       <br>
       <h5>{{share.noDice}}</h5>
-      <div ng-repeat='file in share.dataFiles.files'>
-
-      <a href='/download?path={{file.path}}' download='{{file.name}}'><h5><img class='icon' ng-src="{{file.fileTypePath}}" alt=""> {{file.name}}</h5></a>
+      
+      <div class="contianer">
+        <div class="row">
+          <div ng-repeat='file in share.dataFiles.files' class='col-xs-4'>
+      <a href='/download?path={{file.path}}' download='{{file.name}}' ><h5><img class='icon' ng-src="{{file.fileTypePath}}" alt=""> {{file.name}}</h5></a>
       <!-- <img src="{{path}}" alt=""> -->
       </div>
+      </div>
+    </div>
       <!-- <img src="./public/img/Block-1490729577837-IMG_0027.JPG" alt="">
       <img src="./img/Block-1490729577837-IMG_0027.JPG" alt=""> -->
     </form>
   <!-- </div>
 </div> -->
 </div>
+
+</div>
+
+
+
+
+<!--
+
+<div class="background" ng-show='auth.show'>
+
+
+
+<div ng-controller='authController as auth' >
+
+<form class="register-form" ng-hide='auth.signup'>
+  <h1 ng-click='auth.exit()' class='exitCursor'>X</h1>
+  <h1>Login</h1>
+  <div class="form-group">
+
+ <div class="form-group">
+   <label for="Email">Email address</label>
+   <input type="email" class="form-control" id="Email" placeholder="Email" ng-model='auth.email'>
+ </div>
+
+ <div class="form-group">
+   <label for="password">Password</label>
+   <input type='password' class="form-control" id="password" placeholder="Password" ng-model='auth.password'>
+ </div>
+
+ <button type="submit" class="btn btn-default" ng-click='auth.login()'>Submit</button>
+ <h3>{{auth.loginError}}</h3>
+ </div>
+ <h4 ng-click='auth.signup =! auth.signup'>Signup for a Free Account</h4>
+</form>
+
+<form class="register-form" ng-show='auth.signup'>
+  <h1>Register</h1>
+  <div class="form-group">
+
+ <div class="form-group">
+   <label for="Email">Email address</label>
+   <input ng-class='{red: auth.emailField === true}' type="email" class="form-control" id="Email" placeholder="Email" ng-model='auth.registerEmail'>
+ </div>
+
+ <div class="form-group">
+   <label for="password">Password</label>
+   <input ng-class='{red: auth.noPassMatch === true}' type='password' class="form-control" id="password" placeholder="Password" ng-model='auth.registerPassword'>
+ </div>
+
+ <div class="form-group">
+   <label for="password">Confirm Password</label>
+   <input ng-class='{red: auth.noPassMatch === true}' type='password' class="form-control" id="password" placeholder="Confirm Password" ng-model='auth.confirmPassword'>
+ </div>
+
+ <button type="submit" class="btn btn-default" ng-click='auth.register()'>Submit</button>
+ <h3>{{auth.tryAgain}}</h3>
+ </div>
+</form>
+</div>
+</div> -->
   </body>
 </html>

@@ -95,6 +95,7 @@ app.post('/api/delete/:id', dashShit.deleteFiles);
 app.post('/api/deleteBlock/:id', dashShit.deleteBlock);
 app.put('/api/editName/:id', dashShit.edit);
 app.post('/api/addFiles/:id', multiparty(), dashShit.add);
+app.post('/downloadWithPass', shareShit.downloadWithPass);
 
 
 

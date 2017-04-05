@@ -1,6 +1,7 @@
 
 .right{
   float: right;
+  text-align: center;
 }
 
 .drop-box{
@@ -26,8 +27,6 @@ form {
   display: inline-block;
 }
 
-
-
 .newModal{
   width: 50vw;
   position: absolute;
@@ -42,12 +41,14 @@ form {
   position: fixed;
   width: 100vw;
   height: 100vh;
+  z-index: 10;
+  top:0vh;
 }
 
 .left-select {
   width: 100vw;
   height: 35vh;
-  background: grey;
+  background: white;
   cursor: pointer;
 }
 
@@ -57,6 +58,7 @@ form {
   transform: translate(-50%,-50%);
   position: absolute;
   text-align: center;
+  color: white;
 }
 
 .right-select{
@@ -73,6 +75,7 @@ form {
   transform: translate(-50%,-50%);
   position: absolute;
   text-align: center;
+  color: black;
 }
 
 /*.uploadedFiles{
@@ -186,6 +189,8 @@ form {
   width: 100vw;
   height: 8vh;
   font-size: 200%;
+  background: black;
+  color: white;
   /*position: absolute;*/
 }
 
@@ -203,5 +208,27 @@ form {
 .scroll{
   overflow: scroll;
   height: 260px;
+}
+
+.exitCursor{
+  cursor: pointer;
+  display: inline-block;
+}
+
+.register-form{
+  background: white;
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%,-50%);
+  width: 30%;
+}
+
+.container-fluid{
+  background: black;
+}
+
+.right>a>h3{
+  color: white;
 }
 }

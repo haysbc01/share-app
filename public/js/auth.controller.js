@@ -26,7 +26,7 @@ function authCtrl ($http, authFactory){
           // if(responseData.data.code ===11000){
           auth.register.error =function(err){
           console.log('email is already registered', err)
-          auth.tryAgain = 'This email adress is already registered',
+          auth.tryAgain = 'This email address is already registered',
           auth.emailField = true;
         }
         // }else{
@@ -52,5 +52,9 @@ function authCtrl ($http, authFactory){
   auth.login.error = function(err){
     console.log('login.error', err.data)
     auth.loginError = err.data
+  }
+
+  auth.exit = function(){
+    auth.show = false;
   }
 }

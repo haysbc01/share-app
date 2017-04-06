@@ -93,11 +93,16 @@
         <button type="submit" class="btn btn-default" ng-click='share.downloadWithPass()' ng-show='share.downloadPassword'>Submit</button>
         <br>
         <h5>{{share.noDice}}</h5>
-        <div ng-repeat='file in share.dataFiles.files'>
-
-        <a href='/download?path={{file.path}}' download='{{file.name}}'><h5><img class='icon' ng-src="{{file.fileTypePath}}" alt=""> {{file.name}}</h5></a>
-
+          <div class="contianer">
+            <div class="row">
+              <div ng-repeat='file in share.dataFiles.files' class='col-xs-4'>
+          <a href='/download?path={{file.path}}' download='{{file.name}}' ><h5><img class='icon' ng-src="{{file.fileTypePath}}" alt=""> {{file.name}}</h5></a>
+          <!-- <img src="{{path}}" alt=""> -->
+          </div>
+          </div>
         </div>
+
+
       </form>
       </div>
 

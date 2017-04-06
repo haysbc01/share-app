@@ -11,13 +11,13 @@ function authCtrl ($http, authFactory){
 
   auth.register = function(){
     if(auth.registerPassword != auth.confirmPassword){
-      console.log('nope no match')
+      // console.log('nope no match')
       auth.noPassMatch = true;
       auth.tryAgain = 'Passwords did not match!'
       auth.registerPassword ='';
       auth.confirmPassword = '';
     } else {
-      console.log('yup they match')
+      // console.log('yup they match')
 
       authFactory
         .register(auth.registerEmail,auth.registerPassword)
@@ -25,13 +25,13 @@ function authCtrl ($http, authFactory){
           // console.log(responseData)
           // if(responseData.data.code ===11000){
           auth.register.error =function(err){
-          console.log('email is already registered', err)
+          // console.log('email is already registered', err)
           auth.tryAgain = 'This email address is already registered',
           auth.emailField = true;
         }
         // }else{
         auth.register.success = function(res){
-          console.log('Registration successful')
+          // console.log('Registration successful')
           location.href='/dashboard'
         }
         // })
@@ -45,12 +45,12 @@ function authCtrl ($http, authFactory){
     }
 
   auth.login.success = function(res){
-    console.log('auth.login.success', res.data);
+    // console.log('auth.login.success', res.data);
     location.href = '/dashboard'
   }
 
   auth.login.error = function(err){
-    console.log('login.error', err.data)
+    // console.log('login.error', err.data)
     auth.loginError = err.data
   }
 

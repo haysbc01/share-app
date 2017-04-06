@@ -55,7 +55,11 @@
           <h6 ng-show='share.data'>size limit 500 MB</h6>
           <h2 ng-show='share.big'>Upload is too big, <a href="/auth">create or sign</a> in to be able to upload up to 500mg</h2>
 
+          <h5 ng-repeat='name in share.newfiles' ng-if='share.newfiles.length < 5'>{{name.name}}</h5>
+        <div class="fileScroll" ng-if='share.newfiles.length > 5'>
           <h5 ng-repeat='name in share.newfiles'>{{name.name}}</h5>
+        </div>
+
         </div>
 
 

@@ -4,8 +4,8 @@ var nodemailer  = require ('nodemailer'),
 
 module.exports = {
   email : (req,res)=>{
-    console.log('EMAIL'.yellow, req.body.data.email);
-    console.log(req.files.files.map(function(file){return file.name}).join('\n'))
+    // console.log('EMAIL'.yellow, req.body.data.email);
+    // console.log(req.files.files.map(function(file){return file.name}).join('\n'))
     var options = {
       auth: {
         api_user: 'file.share',
@@ -27,7 +27,7 @@ module.exports = {
       if(err){
         return console.log(err);
       }else{
-      console.log('Message was sent', info);
+      // console.log('Message was sent', info);
     }
     });
   }

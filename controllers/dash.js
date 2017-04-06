@@ -12,7 +12,6 @@ module.exports = {
           res.send(foundFiles)
         }
       })
-    console.log(req.body)
   },
 
   getEdits : (req,res) =>{
@@ -24,11 +23,9 @@ module.exports = {
         res.send(foundFile)
       }
     })
-  console.log(req.body)
 },
 
 deleteFiles : (req,res)=>{
-  console.log(req.params.id)
   Share.findOne({_id: (req.params.id)}, (err,deleteFile)=>{
     // fs.unlinkSync(req.body.path)
 
@@ -50,7 +47,7 @@ deleteFiles : (req,res)=>{
 
 deleteBlock : (req,res)=>{
   Share.findOne({_id: (req.params.id)}, (err,files)=>{
-    console.log(err, files);
+    console.log(err);
     for (var i=0;i<files.files.length;i++){
       fs.unlinkSync(files.files[i].path);
     }
@@ -77,11 +74,9 @@ edit : (req,res)=>{
 add : (req,res)=>{
   // console.log(req.files);
   Share.findOne({_id: (req.params.id)}, (err,files)=>{
-    console.log('req.files.files'.yellow,req.files)
 
     if(req.files.files.length){
       for(var key in req.files.files){
-        console.log(req.files.files[key])
         var file = req.files.files[key];
         var path = `./public/img/Block-${Date.now()}-${file.name}`;
         var fileType = file.name.toLowerCase().slice((file.name.lastIndexOf('.'))+1,file.name.length);

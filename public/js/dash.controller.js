@@ -59,7 +59,6 @@ function dashCtrl ($http, dashFactory){
 
   dash.addToBlock = function(block,files){
 
-    console.log(files)
     dashFactory
       .addFiles(block,files)
       .then(dash.load)
@@ -70,8 +69,8 @@ function dashCtrl ($http, dashFactory){
     block.limitTimes = block.limitTimes || 1
     block.limit += 5
     block.limitTimes++
-    console.log(block.limit, block.limitTimes);
     
+
   }
 
   dash.moreBlocks = function(){

@@ -17,7 +17,7 @@ module.exports = {
       // var fileName = file.name;
       var path = `./public/img/Block-${Date.now()}-${file.name}`;
       // console.log(file);
-      var fileType = file.name.slice((file.name.lastIndexOf('.'))+1,file.name.length);
+      var fileType = file.name.toLowerCase().slice((file.name.lastIndexOf('.'))+1,file.name.length);
       var fileTypePath = `./docIMG/${fileType}.png`
       var data = fs.readFileSync(file.path)
       fs.writeFileSync(`${path}`, data);

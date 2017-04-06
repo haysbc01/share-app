@@ -28,11 +28,11 @@ form {
 }
 
 .newModal{
-  width: 50vw;
+  width: 70vw;
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-60%);
+  transform: translate(-50%,-50%);
   background-color: white;
 }
 
@@ -45,37 +45,58 @@ form {
   top:0vh;
 }
 
+@media screen and (max-width: 600px) {
+.select{
+  bottom: 0%;
+  width: 100%;
+  position: absolute;
+  height: 85vh;
+}
+
 .left-select {
-  width: 100vw;
-  height: 35vh;
-  background: white;
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background: black;
   cursor: pointer;
+  top: 0%;
 }
 
 .left-select > h1{
-  left: 50%;
-  top: 25%;
-  transform: translate(-50%,-50%);
-  position: absolute;
+  /*left: 50%;*/
+  top: 33%;
+  /*transform: translate(-50%,-50%);*/
+  position: relative;
   text-align: center;
   color: white;
 }
 
 .right-select{
-  width: 100vw;
-  height: 35vh;
-  background: black;
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background: white;
   cursor: pointer;
-
+  bottom: 0%;
 }
 
 .right-select > h1{
-  left: 50%;
-  top: 60%;
-  transform: translate(-50%,-50%);
-  position: absolute;
+  /*left: 50%;*/
+  top: 33%;
+  /*transform: translate(-50%,-50%);*/
+  position: relative;
   text-align: center;
   color: black;
+}
+
+}
+
+.right-select:hover{
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.left-select:hover{
+  background: rgba(0, 0, 0, 0.2);
 }
 
 /*.uploadedFiles{
@@ -106,29 +127,41 @@ form {
   height:10vh;
 }
 .left-angle{
-  position: absolute;
+  position: relative;
   width: 50vw;
-  height: 10vh;
+  height: 100px;
   background: black;
+}
+
+.left-angle:hover{
+  background: rgba(0, 0, 0, 0.2);
 }
 .left-angle > h1{
   position: relative;
-  left: 10%;
-  top: 10%;
+  /*left: 10%;*/
+  text-align: center;
+  top: 50%;
   font-size: 250%;
   color: white;
+  transform: translateY(-50%);
 }
 
 .right-angle{
   position: absolute;
   width: 50vw;
-  height: 10vh;
+  height: 100px;
   left: 50vw;
   background-color: white;
 }
+
+.right-angle:hover{
+  background: rgba(0, 0, 0, 0.2);
+}
+
 .right-angle > h1{
   position: relative;
-  left: 10%;
+  /*left: 10%;*/
+  text-align: center;
   top: 10%;
   font-size: 250%;
   color: black;
@@ -154,7 +187,7 @@ form {
 
 .add{
   position: absolute;
-  top: 1vh;
+  top: -3vh;
   left: 1vw;
   border: none;
   background: white;
@@ -163,8 +196,9 @@ form {
 
 .delete{
   position: absolute;
-  top: 1vh;
-  right: 1vw;    border: none;
+  top: -1vh;
+  right: 1vw;
+  border: none;
   background: white;
   color: red;
 }
@@ -210,18 +244,22 @@ form {
   height: 260px;
 }
 
+.cursor{
+  cursor: pointer;
+  display: inline-block;
+  margin: 0px;
+}
 .exitCursor{
   cursor: pointer;
   display: inline-block;
 }
-
 .register-form{
   background: white;
   position: absolute;
   top: 50vh;
   left: 50vw;
   transform: translate(-50%,-50%);
-  width: 30%;
+  width: 75%;
 }
 
 .container-fluid{
@@ -235,5 +273,32 @@ form {
 .fileScroll{
   overflow: scroll;
   height: 100px;
+}
+
+.signup{
+  position: relative;
+  left: 50%;
+  font-size: 100%;
+  transform: translate(-50%,-50%);
+  color: blue;
+  font-style: oblique;
+}
+
+.form-title{
+  text-align: center;
+  border-bottom: 1px solid;
+  font-size: 338%;
+  padding-bottom: 13px;
+}
+.download-title{
+  font-size: 5vw;
+}
+
+.nav{
+  color: white;
+}
+
+.navbar-inverse{
+  background-color: black;
 }
 }

@@ -2,6 +2,7 @@
 <html ng-app='share'>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Dashboard</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.js" charset="utf-8"></script>
@@ -14,36 +15,37 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/850.css">
     <link rel="stylesheet" href="/css/600.css">
+
   </head>
-  <body >
+  <body ng-controller='shareController as share'>
+    <div class="" ng-controller='dashController as dash'>
 
 
 
-    <nav class="navbar navbar-inverse" ng-controller='shareController as share'>
-      <div class="container-fluid">
-        <div class="navbar-header right">
-          <a href="/"><h3 class="col-xs-6">Home</h3></a>
+
+    <nav class="navbar navbar-inverse" >
+          <a href="/"><h3 class="pull-left exitCursor nav">Home</h3></a>
           <!-- <h3 class="col-xs-4">How it Works</h3> -->
-          <a href="/logout"><h3 class="col-xs-6">logout</h3></a>
-          <!-- <a href="/auth"><h3 class="col-xs-4" ng-hide='share.data'>Login / Signup</h3></a> -->
-        </div>
-      </div>
+          <a href="/logout"><h3 class="pull-right exitCursor nav">logout</h3></a>
+
     </nav>
 
-    <div class="" ng-controller='shareController as share'>
 
-    <div class="angles">
-      <div class="right-angle" ng-click='share.download =! share.download' ><h1>Download</h1></div>
-      <div class="left-angle" ng-click='share.upload =! share.upload' ><h1>Upload</h1></div>
-
-    </div>
+    <!-- <div class="angles"> -->
+      <div class="right-angle" ng-click='share.download =! share.download' ><h1 class='download'>Download</h1></div>
+      <div class="left-angle" ng-click='share.upload =! share.upload' ><h1 class="upload">Upload</h1></div>
+      <!-- <h1 class="upload">Upload</h1> -->
+      <!-- <h1 class='download'>Download</h1> -->
+    <!-- </div> -->
 
     <div ng-class="{'background': share.upload || share.download}">
 
       <form class="newModal" ngf-drop multiple ng-model='share.newfiles' ng-show='share.upload'>
-        <h1 ng-click='share.exit()' class='exitCursor'>X</h1>
+        <h1 ng-click='share.exit()' class='cursor pull-right'>X</h1>
         <div class="form-group">
+          <h1 class='form-title'>Upload Files</h1>
           <!-- <button class="drop-box" ngf-drop multiple ng-model='share.newfiles'>Drag and Drop</button> -->
           <h3>Drag and Drop anywhere</h3>
           <h6>or</h6>
@@ -75,9 +77,9 @@
 
 
       <form class="newModal" ng-show='share.download'>
-        <h1 ng-click='share.exit()' class='exitCursor'>X</h1>
+        <h1 ng-click='share.exit()' class='cursor pull-right'>X</h1>
         <div class="form-group">
-          <label for="fetchCode" >Enter a Download Code</label>
+          <h1 for="fetchCode" class='form-title download-title '>Enter a Download Code</h1>
           <input ng-class='{red: share.noCode === true}' class='form-control' placeholder='{{share.userCodePlaceHolder}}' ng-model='share.userCode'>
           <label for="downloadPassword" ng-show='share.downloadPassword'>This download is password protected</label>
           <input type='password' class="form-control" placeholder="{{share.passwordPlaceholder}}" ng-show='share.downloadPassword' ng-model='share.downloadPass'>
@@ -94,15 +96,14 @@
         </div>
       </form>
       </div>
-</div>
 
 
 
 
 
-    <div ng-controller='dashController as dash' g-hide='upload || download'>
+    <div  g-hide='upload || download'>
 
-      <h1>{{dash.greeting}} {{dash.data.email}}</h1>
+      <h1 clas>{{dash.greeting}} {{dash.data.email}}</h1>
 
       <div class="containner">
         <div class="row">
@@ -209,6 +210,6 @@
 
 
 
-
+</div>
   </body>
 </html>

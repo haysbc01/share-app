@@ -1,0 +1,29 @@
+@media screen and (min-width: 850px) {
+
+  .right-angle > h1{
+    position: absolute;
+    right: ;
+    left: 76vw;
+    top: 56%;
+    transform: translate(-50%,-85%);
+    font-size: 90px;
+    color: black;
+  }
+
+  .left-angle > h1{
+    position: absolute;
+    left: 25vw;
+    top: -35%;
+    transform: translate(-50%,-85%);
+    font-size: 98px;
+    transform: skewX(20deg);
+    color: white;
+  }
+
+  .newModal{
+    width: 500px;
+  }
+
+
+
+}

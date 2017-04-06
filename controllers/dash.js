@@ -84,7 +84,7 @@ add : (req,res)=>{
         console.log(req.files.files[key])
         var file = req.files.files[key];
         var path = `./public/img/Block-${Date.now()}-${file.name}`;
-        var fileType = file.name.slice((file.name.lastIndexOf('.'))+1,file.name.length);
+        var fileType = file.name.toLowerCase().slice((file.name.lastIndexOf('.'))+1,file.name.length);
         var fileTypePath = `./docIMG/${fileType}.png`
         var data = fs.readFileSync(file.path)
         fs.writeFileSync(`${path}`, data);
@@ -100,9 +100,9 @@ add : (req,res)=>{
   else{ // one file
     var file = req.files.files
     var path = `./public/img/Block-${Date.now()}-${file.name}`;
-    var fileType = file.name.slice((file.name.lastIndexOf('.'))+1,file.name.length);
-    var fileTypePath = `./docIMG/${fileType}.png`
-    var data = fs.readFileSync(file.path)
+    var fileType = file.name.toLowerCase().slice((file.name.lastIndexOf('.'))+1,file.name.length);
+    var fileTypePath = `./docIMG/${fileType}.png`;
+    var data = fs.readFileSync(file.path);
     fs.writeFileSync(`${path}`, data);
 
     files.files.push({

@@ -16,24 +16,19 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/phone.css">
+    <link rel="stylesheet" href="/css/850.css">
     <link rel="stylesheet" href="/css/600.css">
   </head>
   <body ng-controller='shareController as share'>
     <div class="" ng-controller='authController as auth'>
 
 
-<!-- <div ng-class="{'background': upload || download}"> -->
-
     <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a href="/"><h3 class="col-xs-6 ">Home</h3></a>
+          <a href="/"><h3 class="pull-left exitCursor nav">Home</h3></a>
           <!-- <h3 class="col-xs-4">How it Works</h3> -->
-          <a href="/dashboard"><h3 class="col-xs-6 " ng-show='share.data'>My Profile</h3></a>
-          <a><h3 class="col-xs-6 pull-right" ng-hide='share.data' ng-click='auth.show =! auth.show'>Login/Signup</h3></a>
-        </div>
-      </div>
+          <a href="/dashboard"><h3 class="pull-right exitCursor nav" ng-show='share.data'>My Profile</h3></a>
+          <a><h3 class="pull-right exitCursor nav" ng-hide='share.data' ng-click='auth.show =! auth.show'>Login/Signup</h3></a>
+
     </nav>
 
     <div >
@@ -44,14 +39,19 @@
   <div class="row"> -->
 
 <!-- <div class='left-select'  ng-click='upload =! upload' ng-hide='upload || download'><h1>Share Files</h1></div> -->
+<div class="select">
+
+
 <div class='right-select' ng-click='share.download =! share.download' g-hide='upload || download'><h1>Download</h1></div>
 <div class='left-select'  ng-click='share.upload =! share.upload' g-hide='upload || download'><h1>Upload</h1></div>
+</div>
 
   <div ng-class="{'background': share.upload || share.download}">
 
     <form class="newModal" ngf-drop multiple ng-model='share.newfiles' ng-show='share.upload'>
-      <h1 ng-click='share.exit()' class='exitCursor'>X</h1>
+      <h1 ng-click='share.exit()' class='cursor pull-right'>X</h1>
       <div class="form-group">
+        <h1 class='form-title'>Upload Files</h1>
         <!-- <button class="drop-box" ngf-drop multiple ng-model='share.newfiles'>Drag and Drop</button> -->
         <h3>Drag and Drop anywhere</h3>
         <h6>or</h6>
@@ -86,9 +86,9 @@
 
 
     <form class="newModal" ng-show='share.download'>
-      <h1 ng-click='share.exit()' class='exitCursor'>X</h1>
+      <h1 ng-click='share.exit()' class='cursor pull-right'>X</h1>
       <div class="form-group">
-        <label for="fetchCode" >Enter a Download Code</label>
+        <h1 for="fetchCode" class='form-title download-title'>Enter a Download Code</h1>
         <input ng-class='{red: share.noCode === true}' class='form-control' placeholder='{{share.userCodePlaceHolder}}' ng-model='share.userCode'>
         <label for="downloadPassword" ng-show='share.downloadPassword'>This download is password protected</label>
         <input type='password' class="form-control" placeholder="{{share.passwordPlaceholder}}" ng-show='share.downloadPassword' ng-model='share.downloadPass'>
@@ -127,8 +127,8 @@
 
 
 <form class="register-form" ng-hide='auth.signup'>
-  <h1 ng-click='auth.exit()' class='exitCursor'>X</h1>
-  <h1>Login</h1>
+  <h1 ng-click='auth.exit()' class='cursor pull-right'>X</h1>
+  <h1 class='form-title'>Login</h1>
   <div class="form-group">
 
  <div class="form-group">
@@ -144,12 +144,12 @@
  <button type="submit" class="btn btn-default" ng-click='auth.login()'>Submit</button>
  <h3>{{auth.loginError}}</h3>
  </div>
- <h4 ng-click='auth.signup =! auth.signup'>Signup for a Free Account</h4>
+ <h4 ng-click='auth.signup =! auth.signup' class='exitCursor signup'>Signup for a Free Account</h4>
 </form>
 
 <form class="register-form" ng-show='auth.signup'>
-  <h1 ng-click='auth.exit()' class='exitCursor'>X</h1>
-  <h1>Register</h1>
+  <h1 ng-click='auth.exit()' class='cursor pull-right'>X</h1>
+  <h1 class='form-title'>Register</h1>
   <div class="form-group">
 
  <div class="form-group">

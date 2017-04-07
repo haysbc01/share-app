@@ -12,7 +12,7 @@
   .right-select > h1{
     position: absolute;
     left: 74%;
-    top: 68%;
+    top: 75%;
     transform: translate(-50%,-50%);
     font-size: 11.5vw;
     color: black;
@@ -20,11 +20,11 @@
 
   .left-select > h1{
     position: absolute;
-    left: 32%;
-    top: 12%;
+    left: 27%;
+    top: 4%;
     transform: translate(-50%,-50%);
     -webkit-transform: skew(20deg);
-    font-size: 13vw;
+    font-size: 14vw;
     color: white;
   }
 
@@ -141,6 +141,7 @@
     font-size: 250%;
   }
 
+
   /*.add{
     position: absolute;
     top: 1vh;
@@ -158,7 +159,7 @@
     color: red;
   }*/
 
-  
+
 
 
 

@@ -13,7 +13,7 @@ var express         = require('express'),
     emailShit       = require('./controllers/email'),
     cors            = require('cors'),
     clientSessions  = require('client-sessions'),
-    PORT            = 4000,
+    PORT            = 80,
     app             = express();
 
 mongoose.connect('mongodb://localhost/fileShare')

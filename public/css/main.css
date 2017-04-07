@@ -305,4 +305,17 @@ form {
 .lock{
   width: 30px;
 }
+
+.lardr{
+  left: 0%;
+  position: relative;
+  font-size: 55px;
+  margin: 0%;
+}
+
+.profile{
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+}
 }

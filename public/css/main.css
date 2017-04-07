@@ -301,4 +301,8 @@ form {
 .navbar-inverse{
   background-color: black;
 }
+
+.lock{
+  width: 30px;
+}
 }

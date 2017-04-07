@@ -122,8 +122,9 @@
             <h1 class='add exitCursor' ngf-select='dash.addToBlock(uploads._id,dash.newfiles)' multiple ngf-multiple=true ng-model='dash.newfiles'>+</h1>
             <div class="blockTitle">
 
-              <h3 ng-model='dCode'>Download Code: {{uploads.downloadCode}}</h3>
+              <h3 ng-model='dCode'>Download Code: {{uploads.downloadCode}}<img class='lock' src="/docIMG/lock.png" alt="" ng-if='uploads.password'></h3>
               <h4>Date Created: {{uploads.createdAt | date}}</h4>
+
             </div>
             <div class="scroll">
             <div class="uploadedFiles" ng-repeat='files in uploads.files'>

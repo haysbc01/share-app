@@ -94,9 +94,9 @@
         <br>
         <h5>{{share.noDice}}</h5>
           <div class="contianer">
-            <div class="row">
+            <div class="row downloadScroll">
               <div ng-repeat='file in share.dataFiles.files' class='col-xs-4'>
-          <a href='/download?path={{file.path}}' download='{{file.name}}' ><h5><img class='icon' ng-src="{{file.fileTypePath}}" alt=""> {{file.name}}</h5></a>
+          <a href='/download?path={{file.path}}' download='{{file.name}}' ><h5><img class='icon' ng-src="{{file.fileTypePath}}" alt=""> {{file.name | limitTo:15}}</h5></a>
           <!-- <img src="{{path}}" alt=""> -->
           </div>
           </div>

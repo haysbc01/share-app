@@ -318,4 +318,9 @@ form {
   bottom: 0%;
   right: 0%;
 }
+
+.downloadScroll{
+  overflow: scroll;
+  max-height: 200px;
+}
 }
